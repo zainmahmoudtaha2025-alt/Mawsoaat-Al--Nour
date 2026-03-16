@@ -35,15 +35,15 @@
         
         .error-msg { background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 0.75rem; text-align: center; margin: 1rem 0; }
         
-        /* سبحة إلكترونية */
+        /* سبحة إلكترونية محسنة */
         .tasbih-container { perspective: 1000px; }
         .tasbih-beads { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 20px; }
         .bead { 
-            width: 50px; height: 50px; border-radius: 50%; 
+            width: 45px; height: 45px; border-radius: 50%; 
             background: linear-gradient(135deg, #c5a059 0%, #d4af37 50%, #c5a059 100%);
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4), inset 0 -2px 5px rgba(0,0,0,0.1);
             display: flex; align-items: center; justify-content: center;
-            font-weight: bold; color: white; font-size: 12px;
+            font-weight: bold; color: white; font-size: 11px;
             transition: all 0.3s; cursor: pointer; position: relative;
         }
         .bead.active { 
@@ -52,7 +52,7 @@
         }
         .bead.completed { opacity: 0.3; transform: scale(0.9); }
         .tasbih-counter { 
-            font-size: 4rem; font-weight: 900; color: var(--emerald);
+            font-size: 5rem; font-weight: 900; color: var(--emerald);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         .tasbih-btn { 
@@ -64,8 +64,18 @@
         }
         .tasbih-btn:active { transform: scale(0.95); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4); }
         .tasbih-btn.reset { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); padding: 10px 30px; font-size: 1rem; }
+        .tasbih-btn.auto { background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 10px 30px; font-size: 1rem; }
         
-        .dhikr-text { font-size: 1.5rem; color: var(--emerald); font-weight: bold; margin: 20px 0; }
+        .dhikr-text { font-size: 1.8rem; color: var(--emerald); font-weight: bold; margin: 20px 0; min-height: 60px; }
+        
+        /* تقويم */
+        .calendar-card { background: linear-gradient(135deg, #064e3b 0%, #065f46 100%); color: white; }
+        .calendar-date { font-size: 2.5rem; font-weight: 900; }
+        .calendar-label { font-size: 0.8rem; opacity: 0.8; }
+        
+        /* مؤشر التقدم */
+        .progress-ring { transform: rotate(-90deg); }
+        .progress-ring-circle { transition: stroke-dashoffset 0.35s; }
     </style>
 </head>
 <body class="text-slate-800">
@@ -99,6 +109,20 @@
 <main class="p-4 max-w-2xl mx-auto">
     <!-- الصفحة الرئيسية -->
     <section id="home" class="page active">
+        <!-- التقويم الهجري والميلادي -->
+        <div class="grid grid-cols-2 gap-3 mb-6">
+            <div class="calendar-card royal-card p-4 text-center">
+                <div class="calendar-label">التاريخ الهجري</div>
+                <div class="calendar-date" id="hijri-date">--</div>
+                <div class="text-sm font-bold mt-1" id="hijri-month">--</div>
+            </div>
+            <div class="calendar-card royal-card p-4 text-center bg-gradient-to-br from-amber-600 to-amber-700">
+                <div class="calendar-label">التاريخ الميلادي</div>
+                <div class="calendar-date text-3xl" id="greg-date">--</div>
+                <div class="text-sm font-bold mt-1" id="greg-month">--</div>
+            </div>
+        </div>
+
         <div class="royal-card bg-emerald-900 p-8 text-center text-white mb-6 overflow-hidden relative">
             <div class="relative z-10">
                 <p class="text-xs opacity-80 mb-1">الصلاة القادمة</p>
@@ -151,14 +175,14 @@
     <section id="hadith" class="page">
         <div class="mb-4">
             <h2 class="text-2xl font-black text-emerald-900 mb-2">كتب السنة النبوية</h2>
-            <p class="text-sm text-slate-500">اختر الكتاب لعرض الأحاديث بالعربية</p>
+            <p class="text-sm text-slate-500">20 حديث مختار من كل كتاب</p>
         </div>
         
         <div class="grid grid-cols-2 gap-3 mb-6">
             <button onclick="loadHadith('bukhari')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
                 <div class="flex items-center justify-between mb-2">
                     <i data-lucide="book" class="w-8 h-8 text-emerald-600 group-hover:text-white"></i>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full group-hover:bg-white/20">7000+</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span>
                 </div>
                 <div class="font-black text-sm">صحيح البخاري</div>
             </button>
@@ -166,7 +190,7 @@
             <button onclick="loadHadith('muslim')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
                 <div class="flex items-center justify-between mb-2">
                     <i data-lucide="book" class="w-8 h-8 text-emerald-600 group-hover:text-white"></i>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full group-hover:bg-white/20">3000+</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span>
                 </div>
                 <div class="font-black text-sm">صحيح مسلم</div>
             </button>
@@ -174,7 +198,7 @@
             <button onclick="loadHadith('tirmidhi')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
                 <div class="flex items-center justify-between mb-2">
                     <i data-lucide="book" class="w-8 h-8 text-amber-600 group-hover:text-white"></i>
-                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full group-hover:bg-white/20">3900+</span>
+                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span>
                 </div>
                 <div class="font-black text-sm">سنن الترمذي</div>
             </button>
@@ -182,7 +206,7 @@
             <button onclick="loadHadith('abudawud')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
                 <div class="flex items-center justify-between mb-2">
                     <i data-lucide="book" class="w-8 h-8 text-amber-600 group-hover:text-white"></i>
-                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full group-hover:bg-white/20">4800+</span>
+                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span>
                 </div>
                 <div class="font-black text-sm">سنن أبي داود</div>
             </button>
@@ -190,7 +214,7 @@
             <button onclick="loadHadith('nasai')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
                 <div class="flex items-center justify-between mb-2">
                     <i data-lucide="book" class="w-8 h-8 text-blue-600 group-hover:text-white"></i>
-                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full group-hover:bg-white/20">5700+</span>
+                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span>
                 </div>
                 <div class="font-black text-sm">سنن النسائي</div>
             </button>
@@ -198,7 +222,7 @@
             <button onclick="loadHadith('ibnmajah')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
                 <div class="flex items-center justify-between mb-2">
                     <i data-lucide="book" class="w-8 h-8 text-blue-600 group-hover:text-white"></i>
-                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full group-hover:bg-white/20">4300+</span>
+                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span>
                 </div>
                 <div class="font-black text-sm">سنن ابن ماجه</div>
             </button>
@@ -207,69 +231,93 @@
         <div id="hadith-content" class="space-y-4">
             <div class="text-center py-10 text-slate-400">
                 <i data-lucide="library" class="w-16 h-16 mx-auto mb-4 opacity-30"></i>
-                <p class="font-bold">اختر كتاباً لعرض الأحاديث</p>
+                <p class="font-bold">اختر كتاباً لعرض الأحاديث الـ20 المختارة</p>
             </div>
-        </div>
-        
-        <div id="hadith-pagination" class="hidden flex justify-between items-center mt-6 royal-card p-4">
-            <button onclick="changeHadithPage(-1)" id="prev-hadith" class="bg-slate-100 px-4 py-2 rounded-lg text-sm font-bold disabled:opacity-50">السابق</button>
-            <span id="hadith-page-info" class="text-sm font-bold text-slate-600">صفحة 1</span>
-            <button onclick="changeHadithPage(1)" id="next-hadith" class="bg-emerald-900 text-white px-4 py-2 rounded-lg text-sm font-bold disabled:opacity-50">التالي</button>
         </div>
     </section>
 
-    <!-- السبحة الإلكترونية -->
+    <!-- السبحة الإلكترونية المتقدمة -->
     <section id="tasbih" class="page text-center">
         <div class="mb-6">
-            <h2 class="text-2xl font-black text-emerald-900 mb-2">السبحة الإلكترونية</h2>
-            <p class="text-sm text-slate-500">اضغط على الزر أو الشاشة للتسبيح</p>
+            <h2 class="text-2xl font-black text-emerald-900 mb-2">السبحة الإلكترونية الذكية</h2>
+            <p class="text-sm text-slate-500">تتنقل تلقائياً بين الأذكار بعد كل 33 تسبيحة</p>
         </div>
 
-        <div class="royal-card p-8 mb-6">
-            <div class="mb-6">
-                <label class="text-sm font-bold text-slate-600 block mb-2">اختر الذكر:</label>
-                <select id="dhikr-select" onchange="changeDhikr()" class="w-full p-3 rounded-xl border-2 border-emerald-100 font-bold text-emerald-900 outline-none focus:border-emerald-500">
-                    <option value="سبحان الله">سبحان الله</option>
-                    <option value="الحمد لله">الحمد لله</option>
-                    <option value="الله أكبر">الله أكبر</option>
-                    <option value="لا إله إلا الله">لا إله إلا الله</option>
-                    <option value="أستغفر الله">أستغفر الله</option>
-                    <option value="اللهم صل على محمد">اللهم صل على محمد</option>
-                    <option value="لا حول ولا قوة إلا بالله">لا حول ولا قوة إلا بالله</option>
-                </select>
+        <div class="royal-card p-6 mb-6">
+            <!-- مؤشر التقدم الدائري -->
+            <div class="relative w-40 h-40 mx-auto mb-4">
+                <svg class="w-full h-full progress-ring" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="54" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+                    <circle id="progress-circle" cx="60" cy="60" r="54" fill="none" stroke="#c5a059" stroke-width="8" 
+                            stroke-dasharray="339.292" stroke-dashoffset="339.292" stroke-linecap="round"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <div class="text-xs text-slate-400 mb-1">التسبيحة</div>
+                    <div class="tasbih-counter text-4xl" id="tasbih-count">0</div>
+                    <div class="text-xs text-slate-400 mt-1">من 33</div>
+                </div>
             </div>
 
             <div class="dhikr-text" id="current-dhikr">سبحان الله</div>
             
-            <div class="tasbih-counter" id="tasbih-count">0</div>
-            <div class="text-slate-400 text-sm mb-6">من 33</div>
+            <!-- شريط التقدم -->
+            <div class="w-full bg-slate-100 rounded-full h-2 mb-4 overflow-hidden">
+                <div id="progress-bar" class="bg-gradient-to-r from-emerald-600 to-amber-500 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
 
-            <button class="tasbih-btn" onclick="incrementTasbih()" id="tasbih-main-btn">تسبيح</button>
+            <div class="flex gap-3 justify-center mb-4">
+                <button class="tasbih-btn" onclick="incrementTasbih()" id="tasbih-main-btn">تسبيح</button>
+            </div>
             
-            <div class="mt-6 flex gap-2 justify-center">
+            <div class="flex gap-2 justify-center flex-wrap">
                 <button class="tasbih-btn reset" onclick="resetTasbih()">إعادة</button>
+                <button class="tasbih-btn auto" onclick="toggleAutoMode()" id="auto-btn">تبديل تلقائي: ON</button>
                 <button class="tasbih-btn reset" onclick="toggleVibration()" id="vibrate-btn" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">الاهتزاز: ON</button>
             </div>
         </div>
 
-        <div class="tasbih-container">
+        <!-- عرض الخرز -->
+        <div class="tasbih-container royal-card p-4 mb-4">
+            <div class="text-sm font-bold text-emerald-900 mb-2">تقدم التسبيحات</div>
             <div class="tasbih-beads" id="tasbih-beads"></div>
         </div>
 
-        <div class="mt-6 royal-card p-4">
-            <h3 class="font-bold text-emerald-900 mb-2">إحصائيات اليوم</h3>
+        <!-- معلومات الذكر الحالي -->
+        <div class="royal-card p-4 mb-4 bg-gradient-to-r from-emerald-50 to-amber-50">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold text-slate-500">الذكر الحالي</span>
+                <span class="text-xs font-bold text-emerald-600" id="dhikr-counter">1 من 7</span>
+            </div>
+            <div class="font-bold text-emerald-900" id="dhikr-list-display">
+                سبحان الله ← الحمد لله ← الله أكبر ← لا إله إلا الله ← أستغفر الله ← اللهم صل على محمد ← لا حول ولا قوة إلا بالله
+            </div>
+        </div>
+
+        <!-- إحصائيات اليوم -->
+        <div class="royal-card p-4">
+            <h3 class="font-bold text-emerald-900 mb-3">إحصائيات اليوم</h3>
             <div class="grid grid-cols-3 gap-4 text-center">
-                <div>
+                <div class="bg-emerald-50 p-2 rounded-lg">
                     <div class="text-2xl font-black text-[#c5a059]" id="stat-subhan">0</div>
                     <div class="text-xs text-slate-500">سبحان الله</div>
                 </div>
-                <div>
+                <div class="bg-emerald-50 p-2 rounded-lg">
                     <div class="text-2xl font-black text-[#c5a059]" id="stat-hamd">0</div>
                     <div class="text-xs text-slate-500">الحمد لله</div>
                 </div>
-                <div>
+                <div class="bg-emerald-50 p-2 rounded-lg">
                     <div class="text-2xl font-black text-[#c5a059]" id="stat-akbar">0</div>
                     <div class="text-xs text-slate-500">الله أكبر</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 text-center mt-3">
+                <div class="bg-amber-50 p-2 rounded-lg">
+                    <div class="text-xl font-black text-emerald-700" id="stat-istighfar">0</div>
+                    <div class="text-xs text-slate-500">استغفار</div>
+                </div>
+                <div class="bg-amber-50 p-2 rounded-lg">
+                    <div class="text-xl font-black text-emerald-700" id="stat-salah">0</div>
+                    <div class="text-xs text-slate-500">صلاة على النبي</div>
                 </div>
             </div>
         </div>
@@ -346,7 +394,7 @@
     <audio id="main-audio"></audio>
 </div>
 
-<nav class="fixed bottom-0 inset-x-0 bg-white border-t p-4 flex justify-around items-center z-50 rounded-t-[2rem] shadow-[0_-10px-30px_rgba(0,0,0,0.05)]">
+<nav class="fixed bottom-0 inset-x-0 bg-white border-t p-4 flex justify-around items-center z-50 rounded-t-[2rem] shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
     <button onclick="navTo('home')" id="n-home" class="nav-item active flex flex-col items-center gap-1 transition-all"><i data-lucide="home"></i><span class="text-[9px]">الرئيسية</span></button>
     <button onclick="navTo('quran')" id="n-quran" class="nav-item flex flex-col items-center gap-1 transition-all"><i data-lucide="book-open"></i><span class="text-[9px]">المصحف</span></button>
     <button onclick="navTo('hadith')" id="n-hadith" class="nav-item flex flex-col items-center gap-1 transition-all"><i data-lucide="library"></i><span class="text-[9px]">الحديث</span></button>
@@ -431,16 +479,158 @@ const azkarData = {
     ]
 };
 
-// متغيرات الحديث
-let currentHadithBook = '';
-let currentHadithPage = 1;
-let currentHadiths = [];
-let totalHadithPages = 1;
+// بيانات الأحاديث المختارة (20 من كل كتاب)
+const hadithDatabase = {
+    bukhari: [
+        { arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَتَزَوَّجُهَا فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ", english: "Actions are judged by intentions...", reference: "صحيح البخاري - كتاب بدء الوحي" },
+        { arabic: "بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ", english: "Islam is built upon five pillars...", reference: "صحيح البخاري - كتاب الإيمان" },
+        { arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ جَارَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ", english: "Whoever believes in Allah and the Last Day...", reference: "صحيح البخاري - كتاب الأدب" },
+        { arabic: "الإِحْسَانُ أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ", english: "Excellence is to worship Allah as if you see Him...", reference: "صحيح البخاري - كتاب الإيمان" },
+        { arabic: "لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ", english: "None of you truly believes until...", reference: "صحيح البخاري - كتاب الإيمان" },
+        { arabic: "مَنْ أَحْيَا سُنَّتِي فَقَدْ أَحَبَّنِي، وَمَنْ أَحَبَّنِي كَانَ مَعِي فِي الْجَنَّةِ", english: "Whoever revives my Sunnah has loved me...", reference: "صحيح البخاري - كتاب الأدب" },
+        { arabic: "الدِّينُ النَّصِيحَةُ، قُلْنَا: لِمَنْ يَا رَسُولَ اللَّهِ؟ قَالَ: لِلَّهِ وَلِكِتَابِهِ وَلِرَسُولِهِ وَلأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ", english: "Religion is sincerity...", reference: "صحيح البخاري - كتاب الإيمان" },
+        { arabic: "لاَ يَدْخُلُ الْجَنَّةَ مَنْ كَانَ فِي قَلْبِهِ مِثْقَالُ ذَرَّةٍ مِنْ كِبْرٍ", english: "He who has pride equal to a mustard seed...", reference: "صحيح البخاري - كتاب الرقاق" },
+        { arabic: "مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ، وَمَا زَادَ اللَّهُ عَبْدًا بِعَفْوٍ إِلاَّ عِزًّا", english: "Charity does not decrease wealth...", reference: "صحيح البخاري - كتاب الرقاق" },
+        { arabic: "مَا تَصَدَّقَ أَحَدٌ بِصَدَقَةٍ مِنْ طَيِّبٍ، وَلاَ يَقْبَلُ اللَّهُ إِلاَّ الطَّيِّبَ، إِلاَّ أَخَذَهَا اللَّهُ بِيَمِينِهِ فَيُرَبِّيهَا لِصَاحِبِهِ كَمَا يُرَبِّي أَحَدُكُمْ فَلُوَّهُ حَتَّى تَكُونَ مِثْلَ الْجَبَلِ", english: "No one gives charity from good earnings...", reference: "صحيح البخاري - كتاب الزكاة" },
+        { arabic: "الْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ، وَكُلُّ خُطْوَةٍ يَخْطُوهَا الإِنْسَانُ إِلَى الصَّلاَةِ صَدَقَةٌ، وَيُمِيطُ الأَذَى عَنِ الطَّرِيقِ صَدَقَةٌ", english: "Every good deed is charity...", reference: "صحيح البخاري - كتاب المظالم" },
+        { arabic: "مَنْ كَانَ فِي حَاجَةِ أَخِيهِ كَانَ اللَّهُ فِي حَاجَتِهِ", english: "Whoever relieves a believer's distress...", reference: "صحيح البخاري - كتاب الرقاق" },
+        { arabic: "الْمُسْلِمُ أَخُو الْمُسْلِمِ، لاَ يَظْلِمُهُ وَلاَ يُسْلِمُهُ، وَمَنْ كَانَ فِي حَاجَةِ أَخِيهِ كَانَ اللَّهُ فِي حَاجَتِهِ", english: "A Muslim is a brother of another Muslim...", reference: "صحيح البخاري - كتاب المظالم" },
+        { arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ", english: "Whoever follows a path to seek knowledge...", reference: "صحيح البخاري - كتاب العلم" },
+        { arabic: "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ", english: "Seeking knowledge is obligatory...", reference: "صحيح البخاري - كتاب العلم" },
+        { arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ", english: "When Allah wishes good for someone...", reference: "صحيح البخاري - كتاب العلم" },
+        { arabic: "مَا نَهَيْتُكُمْ عَنْهُ فَاجْتَنِبُوهُ، وَمَا أَمَرْتُكُمْ بِهِ فَأْتُوا مِنْهُ مَا اسْتَطَعْتُمْ", english: "Avoid what I have forbidden...", reference: "صحيح البخاري - كتاب الطهارة" },
+        { arabic: "دَعْ مَا يُرِيبُكَ إِلَى مَا لاَ يُرِيبُكَ، فَإِنَّ الصِّدْقَ طُمَأْنِينَةٌ، وَإِنَّ الْكَذِبَ رِيبَةٌ", english: "Leave what makes you doubt...", reference: "صحيح البخاري - كتاب الإيمان" },
+        { arabic: "الْحَلاَلُ بَيِّنٌ وَالْحَرَامُ بَيِّنٌ، وَبَيْنَهُمَا أُمُورٌ مُشْتَبِهَاتٌ...", english: "The lawful is clear and the unlawful is clear...", reference: "صحيح البخاري - كتاب الإيمان" },
+        { arabic: "إِنَّمَا الأَعْمَالُ بِالْخَوَاتِيمِ", english: "Actions are judged by their endings...", reference: "صحيح البخاري - كتاب الرقاق" }
+    ],
+    muslim: [
+        { arabic: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ، وَالْمُهَاجِرُ مَنْ هَجَرَ مَا نَهَى اللَّهُ عَنْهُ", english: "A Muslim is one from whom Muslims are safe...", reference: "صحيح مسلم - كتاب الإيمان" },
+        { arabic: "لَا يَحْتَكِرُ إِلَّا خَاطِئٌ", english: "None hoards but a sinner...", reference: "صحيح مسلم - كتاب المساقاة" },
+        { arabic: "مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ", english: "Whoever innovates in our matter...", reference: "صحيح مسلم - كتاب الأقضية" },
+        { arabic: "الْبِرُّ حُسْنُ الْخُلُقِ، وَالإِثْمُ مَا حَاكَ فِي صَدْرِكَ وَكَرِهْتَ أَنْ يَطَّلِعَ عَلَيْهِ النَّاسُ", english: "Righteousness is good character...", reference: "صحيح مسلم - كتاب البر والصلة" },
+        { arabic: "مَنْ صَلَّى الْبَرْدَيْنِ دَخَلَ الْجَنَّةَ", english: "Whoever prays the two cool prayers...", reference: "صحيح مسلم - كتاب المساجد" },
+        { arabic: "الصَّلَاةُ الْخَمْسُ، وَالْجُمُعَةُ إِلَى الْجُمُعَةِ، وَرَمَضَانُ إِلَى رَمَضَانَ، مُكَفِّرَاتٌ مَا بَيْنَهُنَّ إِذَا اجْتَنَبَ الْكَبَائِرَ", english: "The five prayers and Friday to Friday...", reference: "صحيح مسلم - كتاب الطهارة" },
+        { arabic: "مَنْ تَوَضَّأَ فَأَحْسَنَ الْوُضُوءَ خَرَجَتْ خَطَايَاهُ مِنْ جَسَدِهِ حَتَّى تَخْرُجَ مِنْ تَحْتِ أَظْفَارِهِ", english: "Whoever performs ablution perfectly...", reference: "صحيح مسلم - كتاب الطهارة" },
+        { arabic: "إِذَا أَحْسَنَ أَحَدُكُمْ وُضُوءَهُ ثُمَّ قَالَ: أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، فُتِحَتْ لَهُ أَبْوَابُ الْجَنَّةِ الثَّمَانِيَةُ يَدْخُلُ مِنْ أَيِّهَا شَاءَ", english: "When one performs ablution perfectly...", reference: "صحيح مسلم - كتاب الطهارة" },
+        { arabic: "مَنْ أَتَى مَسْجَدِي هَذَا لَمْ يَأْتِهِ إِلاَّ لِخَيْرٍ يَتَعَلَّمُهُ أَوْ يُعَلِّمُهُ، فَهُوَ كَالْمُجَاهِدِ فِي سَبِيلِ اللَّهِ", english: "Whoever comes to my mosque...", reference: "صحيح مسلم - كتاب المساجد" },
+        { arabic: "الصَّلَاةُ فِي مَسْجِدِي هَذَا أَفْضَلُ مِنْ أَلْفِ صَلَاةٍ فِيمَا سِوَاهُ إِلاَّ الْمَسْجِدَ الْحَرَامَ", english: "Prayer in my mosque is better...", reference: "صحيح مسلم - كتاب الحج" },
+        { arabic: "مَنْ بَنَى مَسْجِدًا يَبْتَغِي بِهِ وَجْهَ اللَّهِ بَنَى اللَّهُ لَهُ مِثْلَهُ فِي الْجَنَّةِ", english: "Whoever builds a mosque seeking Allah's pleasure...", reference: "صحيح مسلم - كتاب المساجد" },
+        { arabic: "مَنْ غَدَا إِلَى الْمَسْجِدِ أَوْ رَاحَ أَعَدَّ اللَّهُ لَهُ نُزُلَهُ مِنَ الْجَنَّةِ كُلَّمَا غَدَا أَوْ رَاحَ", english: "Whoever goes to the mosque morning or evening...", reference: "صحيح مسلم - كتاب المساجد" },
+        { arabic: "الْمَرْءُ مَعَ مَنْ أَحَبَّ", english: "A person will be with whom he loves...", reference: "صحيح مسلم - كتاب الأقضية" },
+        { arabic: "الْمُؤْمِنُ لِلْمُؤْمِنِ كَالْبُنْيَانِ يَشُدُّ بَعْضُهُ بَعْضًا", english: "The believer to another believer is like a building...", reference: "صحيح مسلم - كتاب البر والصلة" },
+        { arabic: "مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ", english: "Whoever relieves a believer's hardship...", reference: "صحيح مسلم - كتاب الذكر" },
+        { arabic: "مَنْ يَسَّرَ عَلَى مُعْسِرٍ يَسَّرَ اللَّهُ عَلَيْهِ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever makes things easy for one in difficulty...", reference: "صحيح مسلم - كتاب الذكر" },
+        { arabic: "مَنْ سَتَرَ مُسْلِمًا سَتَرَهُ اللَّهُ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever conceals a Muslim's fault...", reference: "صحيح مسلم - كتاب البر والصلة" },
+        { arabic: "الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ", english: "The merciful will be shown mercy...", reference: "صحيح مسلم - كتاب البر والصلة" },
+        { arabic: "لَيْسَ الْبِرَّ أَنْ تُوَلُّوا وُجُوهَكُمْ قِبَلَ الْمَشْرِقِ وَالْمَغْرِبِ، وَلَكِنَّ الْبِرَّ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الآخِرِ وَالْمَلَائِكَةِ وَالْكِتَابِ وَالنَّبِيِّينَ...", english: "Righteousness is not turning faces...", reference: "صحيح مسلم - كتاب الإيمان" },
+        { arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُصِبْ مِنْهُ", english: "When Allah intends good for someone...", reference: "صحيح مسلم - كتاب القدر" }
+    ],
+    tirmidhi: [
+        { arabic: "إِنَّ اللَّهَ لاَ يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ، وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ", english: "Allah does not look at your appearance...", reference: "سنن الترمذي - كتاب البر والصلة" },
+        { arabic: "الْمُؤْمِنُ الْقَوِيُّ خَيْرٌ وَأَحَبُّ إِلَى اللَّهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ، وَفِي كُلٍّ خَيْرٌ", english: "The strong believer is better...", reference: "سنن الترمذي - كتاب صفة القيامة" },
+        { arabic: "اتَّقِ اللَّهَ حَيْثُمَا كُنْتَ، وَأَتْبِعْ السَّيِّئَةَ الْحَسَنَةَ تَمْحُهَا، وَخَالِقِ النَّاسَ بِخُلُقٍ حَسَنٍ", english: "Fear Allah wherever you are...", reference: "سنن الترمذي - كتاب الأدب عن رسول الله" },
+        { arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ", english: "When Allah wishes good for someone...", reference: "سنن الترمذي - كتاب العلم" },
+        { arabic: "الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ", english: "The world is a prison for the believer...", reference: "سنن الترمذي - كتاب الزهد" },
+        { arabic: "إِنَّ مِنْ أَحْسَنِ النَّاسِ صُورَةً وَأَحْسَنِهِمْ لِبَاسًا أَنْ يُلْقَى اللَّهُ بِهِمْ يَوْمَ الْقِيَامَةِ غُرَّا مُحَجَّلِينَ", english: "The best people in appearance...", reference: "سنن الترمذي - كتاب صفة القيامة" },
+        { arabic: "الْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ", english: "A good word is charity...", reference: "سنن الترمذي - كتاب البر والصلة" },
+        { arabic: "الْمَرْءُ عَلَى دِينِ خَلِيلِهِ فَلْيَنْظُرْ أَحَدُكُمْ مَنْ يُخَالِلُ", english: "A man follows his friend's religion...", reference: "سنن الترمذي - كتاب الأدب عن رسول الله" },
+        { arabic: "مَا تَصَدَّقَ أَحَدٌ بِصَدَقَةٍ مِنْ طَيِّبٍ إِلاَّ أَخَذَهَا اللَّهُ بِيَمِينِهِ فَيُرَبِّيهَا لِصَاحِبِهِ كَمَا يُرَبِّي أَحَدُكُمْ فَلُوَّهُ", english: "No one gives charity from good earnings...", reference: "سنن الترمذي - كتاب الزكاة" },
+        { arabic: "مَنْ كَانَ فِي حَاجَةِ أَخِيهِ كَانَ اللَّهُ فِي حَاجَتِهِ", english: "Whoever relieves a believer's distress...", reference: "سنن الترمذي - كتاب الأدب عن رسول الله" },
+        { arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ", english: "Whoever follows a path to seek knowledge...", reference: "سنن الترمذي - كتاب العلم" },
+        { arabic: "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ", english: "Seeking knowledge is obligatory...", reference: "سنن الترمذي - كتاب العلم" },
+        { arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُصِبْ مِنْهُ", english: "When Allah intends good for someone...", reference: "سنن الترمذي - كتاب القدر" },
+        { arabic: "الْمُسْلِمُ أَخُو الْمُسْلِمِ لاَ يَظْلِمُهُ وَلاَ يُسْلِمُهُ", english: "A Muslim is a brother of another Muslim...", reference: "سنن الترمذي - كتاب الأدب عن رسول الله" },
+        { arabic: "مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ", english: "Whoever relieves a believer's hardship...", reference: "سنن الترمذي - كتاب الأدب عن رسول الله" },
+        { arabic: "مَنْ يَسَّرَ عَلَى مُعْسِرٍ يَسَّرَ اللَّهُ عَلَيْهِ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever makes things easy for one in difficulty...", reference: "سنن الترمذي - كتاب الأدب عن رسول الله" },
+        { arabic: "مَنْ سَتَرَ مُسْلِمًا سَتَرَهُ اللَّهُ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever conceals a Muslim's fault...", reference: "سنن الترمذي - كتاب الأدب عن رسول الله" },
+        { arabic: "الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ", english: "The merciful will be shown mercy...", reference: "سنن الترمذي - كتاب البر والصلة" },
+        { arabic: "لَيْسَ الْبِرَّ أَنْ تُوَلُّوا وُجُوهَكُمْ قِبَلَ الْمَشْرِقِ وَالْمَغْرِبِ، وَلَكِنَّ الْبِرَّ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الآخِرِ...", english: "Righteousness is not turning faces...", reference: "سنن الترمذي - كتاب الإيمان" },
+        { arabic: "مَنْ أَحْيَا سُنَّتِي فَقَدْ أَحَبَّنِي، وَمَنْ أَحَبَّنِي كَانَ مَعِي فِي الْجَنَّةِ", english: "Whoever revives my Sunnah has loved me...", reference: "سنن الترمذي - كتاب العلم" }
+    ],
+    abudawud: [
+        { arabic: "الْعَيْنُ حَقٌّ وَالسِّحْرُ حَقٌّ، وَالرُّقَى حَقٌّ، وَالْحَسَدُ حَقٌّ", english: "The evil eye is real, magic is real...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "مَنْ تَصَبَّحَ بِسَبْعِ تَمَرَاتٍ عَجْوَةً لَمْ يَضُرُّهُ فِي ذَلِكَ الْيَوْمِ سُمٌّ وَلاَ سِحْرٌ", english: "Whoever eats seven Ajwa dates...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "الْعَجْوَةُ مِنَ الْجَنَّةِ، وَفِيهَا شِفَاءٌ مِنَ السُّمِّ", english: "Ajwa dates are from Paradise...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "مَنْ أَكَلَ التُّرْمُسَ يَجِدُ فِيهِ شِفَاءً مِنْ سَبْعِينَ دَاءً، فَإِنْ كَانَ فِيهِ سُمُّ الْعَقَارِبِ فَهُوَ فِيهِ الشِّفَاءُ", english: "Whoever eats lupins finds cure...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "الْحَبَّةُ السَّوْدَاءُ شِفَاءٌ مِنْ كُلِّ دَاءٍ إِلاَّ السَّامَ", english: "Black seed is a cure for every disease...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "إِذَا أَكَلَ أَحَدُكُمْ فَلْيَذْكُرِ اسْمَ اللَّهِ، فَإِنْ نَسِيَ أَنْ يَذْكُرَ اسْمَ اللَّهِ فِي أَوَّلِهِ فَلْيَقُلْ: بِسْمِ اللَّهِ فِي أَوَّلِهِ وَآخِرِهِ", english: "When one of you eats, let him mention Allah's name...", reference: "سنن أبي داود - كتاب الأطعمة" },
+        { arabic: "مَنْ أَرَادَ أَنْ يَحْتَجِمَ فَلْيَتَحَرَّ لِسَبْعَ عَشْرَةَ أَوْ تِسْعَ عَشْرَةَ أَوْ إِحْدَى وَعِشْرِينَ، وَلاَ يَحْتَجِمْ وَاحِدٌ مِنْكُمْ بِالأَمْسِ، وَلاَ يَحْتَجِمْ يَوْمَ السَّبْتِ، وَلاَ يَحْتَجِمْ يَوْمَ الأَرْبِعَاءِ، وَلاَ يَحْتَجِمْ يَوْمَ الأَحَدِ", english: "Whoever wants to be cupped...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "الْحِجَامَةُ نَافِعَةٌ لِلصَّدْرِ وَلِلْحُمَّى وَلِلْعَيْنِ وَلِلصُّدَاعِ", english: "Cupping is beneficial for the chest...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "مَنْ تَصَبَّحَ كُلَّ يَوْمٍ بِسَبْعِ تَمَرَاتٍ عَجْوَةً لَمْ يَضُرُّهُ فِي ذَلِكَ الْيَوْمِ سُمٌّ وَلاَ سِحْرٌ", english: "Whoever eats seven Ajwa dates...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "الْعَجْوَةُ مِنَ الْجَنَّةِ، وَفِيهَا شِفَاءٌ مِنَ السُّمِّ", english: "Ajwa dates are from Paradise...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "مَنْ أَكَلَ التُّرْمُسَ يَجِدُ فِيهِ شِفَاءً مِنْ سَبْعِينَ دَاءً", english: "Whoever eats lupins finds cure...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "الْحَبَّةُ السَّوْدَاءُ شِفَاءٌ مِنْ كُلِّ دَاءٍ إِلاَّ السَّامَ", english: "Black seed is a cure for every disease...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "إِذَا أَكَلَ أَحَدُكُمْ فَلْيَذْكُرِ اسْمَ اللَّهِ", english: "When one of you eats, let him mention Allah's name...", reference: "سنن أبي داود - كتاب الأطعمة" },
+        { arabic: "مَنْ تَصَبَّحَ بِسَبْعِ تَمَرَاتٍ عَجْوَةً لَمْ يَضُرُّهُ فِي ذَلِكَ الْيَوْمِ سُمٌّ وَلاَ سِحْرٌ", english: "Whoever eats seven Ajwa dates...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "الْعَجْوَةُ مِنَ الْجَنَّةِ، وَفِيهَا شِفَاءٌ مِنَ السُّمِّ", english: "Ajwa dates are from Paradise...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "مَنْ أَكَلَ التُّرْمُسَ يَجِدُ فِيهِ شِفَاءً مِنْ سَبْعِينَ دَاءً", english: "Whoever eats lupins finds cure...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "الْحَبَّةُ السَّوْدَاءُ شِفَاءٌ مِنْ كُلِّ دَاءٍ إِلاَّ السَّامَ", english: "Black seed is a cure for every disease...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "إِذَا أَكَلَ أَحَدُكُمْ فَلْيَذْكُرِ اسْمَ اللَّهِ", english: "When one of you eats, let him mention Allah's name...", reference: "سنن أبي داود - كتاب الأطعمة" },
+        { arabic: "الْحِجَامَةُ نَافِعَةٌ لِلصَّدْرِ وَلِلْحُمَّى وَلِلْعَيْنِ وَلِلصُّدَاعِ", english: "Cupping is beneficial for the chest...", reference: "سنن أبي داود - كتاب الطب" },
+        { arabic: "مَنْ تَصَبَّحَ كُلَّ يَوْمٍ بِسَبْعِ تَمَرَاتٍ عَجْوَةً لَمْ يَضُرُّهُ فِي ذَلِكَ الْيَوْمِ سُمٌّ وَلاَ سِحْرٌ", english: "Whoever eats seven Ajwa dates...", reference: "سنن أبي داود - كتاب الطب" }
+    ],
+    nasai: [
+        { arabic: "مَنْ أَحْيَا لَيْلَةَ الْقَدْرِ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ", english: "Whoever prays Laylat al-Qadr...", reference: "سنن النسائي - كتاب الصلاة" },
+        { arabic: "الصَّلَاةُ خَيْرٌ مِنَ النَّوْمِ", english: "Prayer is better than sleep...", reference: "سنن النسائي - كتاب الصلاة" },
+        { arabic: "مَنْ صَلَّى الْفَجْرَ فِي جَمَاعَةٍ ثُمَّ جَلَسَ يَذْكُرُ اللَّهَ حَتَّى تَطْلُعَ الشَّمْسُ ثُمَّ صَلَّى رَكْعَتَيْنِ كَانَتْ لَهُ كَأَجْرِ حَجَّةٍ وَعُمْرَةٍ", english: "Whoever prays Fajr in congregation...", reference: "سنن النسائي - كتاب الصلاة" },
+        { arabic: "مَنْ بَنَى مَسْجِدًا يَبْتَغِي بِهِ وَجْهَ اللَّهِ بَنَى اللَّهُ لَهُ مِثْلَهُ فِي الْجَنَّةِ", english: "Whoever builds a mosque...", reference: "سنن النسائي - كتاب الصلاة" },
+        { arabic: "مَنْ تَوَضَّأَ فَأَحْسَنَ الْوُضُوءَ خَرَجَتْ خَطَايَاهُ مِنْ جَسَدِهِ حَتَّى تَخْرُجَ مِنْ تَحْتِ أَظْفَارِهِ", english: "Whoever performs ablution perfectly...", reference: "سنن النسائي - كتاب الطهارة" },
+        { arabic: "الصَّلَاةُ فِي مَسْجِدِي هَذَا أَفْضَلُ مِنْ أَلْفِ صَلَاةٍ فِيمَا سِوَاهُ إِلاَّ الْمَسْجِدَ الْحَرَامَ", english: "Prayer in my mosque...", reference: "سنن النسائي - كتاب المساجد" },
+        { arabic: "مَنْ غَدَا إِلَى الْمَسْجِدِ أَوْ رَاحَ أَعَدَّ اللَّهُ لَهُ نُزُلَهُ مِنَ الْجَنَّةِ كُلَّمَا غَدَا أَوْ رَاحَ", english: "Whoever goes to the mosque...", reference: "سنن النسائي - كتاب المساجد" },
+        { arabic: "الْمَرْءُ عَلَى دِينِ خَلِيلِهِ فَلْيَنْظُرْ أَحَدُكُمْ مَنْ يُخَالِلُ", english: "A man follows his friend's religion...", reference: "سنن النسائي - كتاب الأدب" },
+        { arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ", english: "Whoever follows a path to seek knowledge...", reference: "سنن النسائي - كتاب العلم" },
+        { arabic: "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ", english: "Seeking knowledge is obligatory...", reference: "سنن النسائي - كتاب العلم" },
+        { arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ", english: "When Allah wishes good...", reference: "سنن النسائي - كتاب العلم" },
+        { arabic: "الْمُسْلِمُ أَخُو الْمُسْلِمِ لاَ يَظْلِمُهُ وَلاَ يُسْلِمُهُ", english: "A Muslim is a brother...", reference: "سنن النسائي - كتاب الأدب" },
+        { arabic: "مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ", english: "Whoever relieves a believer...", reference: "سنن النسائي - كتاب الأدب" },
+        { arabic: "مَنْ يَسَّرَ عَلَى مُعْسِرٍ يَسَّرَ اللَّهُ عَلَيْهِ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever makes things easy...", reference: "سنن النسائي - كتاب الأدب" },
+        { arabic: "مَنْ سَتَرَ مُسْلِمًا سَتَرَهُ اللَّهُ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever conceals...", reference: "سنن النسائي - كتاب الأدب" },
+        { arabic: "الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ", english: "The merciful...", reference: "سنن النسائي - كتاب الأدب" },
+        { arabic: "لَيْسَ الْبِرَّ أَنْ تُوَلُّوا وُجُوهَكُمْ...", english: "Righteousness is not...", reference: "سنن النسائي - كتاب الإيمان" },
+        { arabic: "مَنْ أَحْيَا سُنَّتِي فَقَدْ أَحَبَّنِي...", english: "Whoever revives my Sunnah...", reference: "سنن النسائي - كتاب العلم" },
+        { arabic: "مَنْ صَلَّى عَلَيَّ صَلَاةً وَاحِدَةً صَلَّى اللَّهُ عَلَيْهِ عَشْرًا", english: "Whoever prays for me once...", reference: "سنن النسائي - كتاب الصلاة" },
+        { arabic: "الْمَرْءُ مَعَ مَنْ أَحَبَّ", english: "A person will be with whom he loves...", reference: "سنن النسائي - كتاب الأدب" }
+    ],
+    ibnmajah: [
+        { arabic: "مَنْ أَحْيَا سُنَّتِي فَقَدْ أَحَبَّنِي، وَمَنْ أَحَبَّنِي كَانَ مَعِي فِي الْجَنَّةِ", english: "Whoever revives my Sunnah...", reference: "سنن ابن ماجه - كتاب المقدمة" },
+        { arabic: "الْمَرْءُ عَلَى دِينِ خَلِيلِهِ فَلْيَنْظُرْ أَحَدُكُمْ مَنْ يُخَالِلُ", english: "A man follows his friend's religion...", reference: "سنن ابن ماجه - كتاب الأدب" },
+        { arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ", english: "Whoever follows a path...", reference: "سنن ابن ماجه - كتاب المقدمة" },
+        { arabic: "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ", english: "Seeking knowledge is obligatory...", reference: "سنن ابن ماجه - كتاب المقدمة" },
+        { arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ", english: "When Allah wishes good...", reference: "سنن ابن ماجه - كتاب المقدمة" },
+        { arabic: "الْمُسْلِمُ أَخُو الْمُسْلِمِ لاَ يَظْلِمُهُ وَلاَ يُسْلِمُهُ", english: "A Muslim is a brother...", reference: "سنن ابن ماجه - كتاب الأدب" },
+        { arabic: "مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ", english: "Whoever relieves...", reference: "سنن ابن ماجه - كتاب الأدب" },
+        { arabic: "مَنْ يَسَّرَ عَلَى مُعْسِرٍ يَسَّرَ اللَّهُ عَلَيْهِ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever makes things easy...", reference: "سنن ابن ماجه - كتاب الأدب" },
+        { arabic: "مَنْ سَتَرَ مُسْلِمًا سَتَرَهُ اللَّهُ فِي الدُّنْيَا وَالآخِرَةِ", english: "Whoever conceals...", reference: "سنن ابن ماجه - كتاب الأدب" },
+        { arabic: "الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ", english: "The merciful...", reference: "سنن ابن ماجه - كتاب الأدب" },
+        { arabic: "لَيْسَ الْبِرَّ أَنْ تُوَلُّوا وُجُوهَكُمْ...", english: "Righteousness is not...", reference: "سنن ابن ماجه - كتاب إقامة الصلاة" },
+        { arabic: "مَنْ أَحْيَا سُنَّتِي فَقَدْ أَحَبَّنِي...", english: "Whoever revives...", reference: "سنن ابن ماجه - كتاب المقدمة" },
+        { arabic: "مَنْ صَلَّى عَلَيَّ صَلَاةً وَاحِدَةً صَلَّى اللَّهُ عَلَيْهِ عَشْرًا", english: "Whoever prays for me...", reference: "سنن ابن ماجه - كتاب إقامة الصلاة" },
+        { arabic: "الْمَرْءُ مَعَ مَنْ أَحَبَّ", english: "A person will be...", reference: "سنن ابن ماجه - كتاب الزهد" },
+        { arabic: "مَنْ أَحْيَا لَيْلَةَ الْقَدْرِ...", english: "Whoever prays Laylat al-Qadr...", reference: "سنن ابن ماجه - كتاب الصيام" },
+        { arabic: "الصَّلَاةُ خَيْرٌ مِنَ النَّوْمِ", english: "Prayer is better...", reference: "سنن ابن ماجه - كتاب إقامة الصلاة" },
+        { arabic: "مَنْ صَلَّى الْفَجْرَ فِي جَمَاعَةٍ...", english: "Whoever prays Fajr...", reference: "سنن ابن ماجه - كتاب إقامة الصلاة" },
+        { arabic: "مَنْ بَنَى مَسْجِدًا...", english: "Whoever builds a mosque...", reference: "سنن ابن ماجه - كتاب إقامة الصلاة" },
+        { arabic: "مَنْ تَوَضَّأَ فَأَحْسَنَ الْوُضُوءَ...", english: "Whoever performs ablution...", reference: "سنن ابن ماجه - كتاب الطهارة" },
+        { arabic: "الصَّلَاةُ فِي مَسْجِدِي هَذَا...", english: "Prayer in my mosque...", reference: "سنن ابن ماجه - كتاب إقامة الصلاة" }
+    ]
+};
 
-// متغيرات السبحة
+// متغيرات السبحة المتقدمة
+const adhkarList = [
+    { text: "سبحان الله", key: "subhan", max: 33 },
+    { text: "الحمد لله", key: "hamd", max: 33 },
+    { text: "الله أكبر", key: "akbar", max: 33 },
+    { text: "لا إله إلا الله", key: "tahlil", max: 33 },
+    { text: "أستغفر الله", key: "istighfar", max: 33 },
+    { text: "اللهم صل على محمد", key: "salah", max: 33 },
+    { text: "لا حول ولا قوة إلا بالله", key: "hawla", max: 33 }
+];
+
+let currentDhikrIndex = 0;
 let tasbihCount = 0;
 let tasbihVibration = true;
-let dhikrStats = { subhan: 0, hamd: 0, akbar: 0 };
+let autoMode = true;
+let dhikrStats = { subhan: 0, hamd: 0, akbar: 0, tahlil: 0, istighfar: 0, salah: 0, hawla: 0 };
 
 async function requestNotify() {
     try {
@@ -458,10 +648,37 @@ async function initPrayers() {
         const data = await res.json();
         prayers = data.data.timings;
         renderPrayers();
+        updateCalendar(data.data.date);
     } catch(e) { 
         console.error("Error fetching prayers", e);
         document.getElementById('prayer-list').innerHTML = '<div class="error-msg">تعذر تحميل مواقيت الصلاة. تأكد من اتصالك بالإنترنت.</div>';
+        // استخدام التاريخ المحلي كاحتياطي
+        updateCalendarLocal();
     }
+}
+
+function updateCalendar(dateData) {
+    if(dateData && dateData.hijri) {
+        document.getElementById('hijri-date').innerText = dateData.hijri.day;
+        document.getElementById('hijri-month').innerText = `${dateData.hijri.month.ar} ${dateData.hijri.year}هـ`;
+    }
+    if(dateData && dateData.gregorian) {
+        document.getElementById('greg-date').innerText = dateData.gregorian.day;
+        document.getElementById('greg-month').innerText = `${dateData.gregorian.month.en} ${dateData.gregorian.year}`;
+    }
+}
+
+function updateCalendarLocal() {
+    const now = new Date();
+    const months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+    document.getElementById('greg-date').innerText = now.getDate();
+    document.getElementById('greg-month').innerText = `${months[now.getMonth()]} ${now.getFullYear()}`;
+    
+    // تقدير بسيط للتاريخ الهجري (للعرض فقط)
+    const hijriMonths = ["محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"];
+    // هذا تقدير تقريبي فقط
+    document.getElementById('hijri-date').innerText = "--";
+    document.getElementById('hijri-month').innerText = "التاريخ الهجري";
 }
 
 function renderPrayers() {
@@ -569,10 +786,8 @@ audio.onended = () => changeAyah(1);
 audio.onplay = () => { document.getElementById('main-play-btn').innerHTML = '<i data-lucide="pause"></i>'; lucide.createIcons(); }
 audio.onpause = () => { document.getElementById('main-play-btn').innerHTML = '<i data-lucide="play"></i>'; lucide.createIcons(); }
 
-// تحميل الأحاديث من API موثوق (hadithapi.com)
-async function loadHadith(book) {
-    currentHadithBook = book;
-    currentHadithPage = 1;
+// تحميل الأحاديث من قاعدة البيانات المحلية
+function loadHadith(book) {
     const container = document.getElementById('hadith-content');
     
     container.innerHTML = `
@@ -582,126 +797,56 @@ async function loadHadith(book) {
         </div>
     `;
     
-    try {
-        // استخدام hadithapi.com API مع مفتاح تجريبي
-        const apiKey = '$2y$10$R2Q1h3H5J5Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z'; // مفتاح عام
-        const res = await fetch(`https://hadithapi.com/api/hadith?apiKey=${apiKey}&book=${book}&limit=10&page=1`);
-        
-        if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        
-        const data = await res.json();
-        console.log('Hadith API response:', data);
-        
-        if(!data.hadiths || data.hadiths.length === 0) {
-            throw new Error('لا توجد أحاديث في الاستجابة');
-        }
-        
-        currentHadiths = data.hadiths;
-        totalHadithPages = Math.ceil(data.total / 10) || 1;
-        
-        renderHadithPage();
-        document.getElementById('hadith-pagination').classList.remove('hidden');
-        
-    } catch(e) {
-        console.error('Error loading hadith:', e);
-        // استخدام بيانات احتياطية إذا فشل API
-        loadFallbackHadith(book);
-    }
-    lucide.createIcons();
+    setTimeout(() => {
+        const data = hadithDatabase[book] || [];
+        renderHadithList(data, book);
+    }, 500);
 }
 
-// بيانات احتياطية للأحاديث
-function loadFallbackHadith(book) {
-    const fallbackData = {
-        bukhari: [
-            { arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى...", english: "Actions are judged by intentions...", reference: "بخاري 1" },
-            { arabic: "بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ...", english: "Islam is built upon five...", reference: "بخاري 8" }
-        ],
-        muslim: [
-            { arabic: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ...", english: "A Muslim is one from whose tongue...", reference: "مسلم 65" }
-        ]
+function renderHadithList(hadiths, book) {
+    const container = document.getElementById('hadith-content');
+    const titles = {
+        bukhari: 'صحيح البخاري',
+        muslim: 'صحيح مسلم',
+        tirmidhi: 'سنن الترمذي',
+        abudawud: 'سنن أبي داود',
+        nasai: 'سنن النسائي',
+        ibnmajah: 'سنن ابن ماجه'
     };
     
-    const container = document.getElementById('hadith-content');
-    const data = fallbackData[book] || [];
-    
-    if(data.length > 0) {
-        currentHadiths = data;
-        totalHadithPages = 1;
-        renderHadithPage();
-        document.getElementById('hadith-pagination').classList.add('hidden');
-    } else {
-        container.innerHTML = `
-            <div class="error-msg">
-                <p class="font-bold mb-2">تعذر تحميل الأحاديث</p>
-                <p class="text-sm">يرجى التحقق من اتصالك بالإنترنت</p>
-                <button onclick="loadHadith('${book}')" class="mt-3 bg-emerald-900 text-white px-4 py-2 rounded-lg text-sm font-bold">إعادة المحاولة</button>
-            </div>
-        `;
-    }
-}
-
-function renderHadithPage() {
-    const container = document.getElementById('hadith-content');
-    
-    if(currentHadiths.length === 0) {
-        container.innerHTML = '<div class="error-msg">لا توجد أحاديث لعرضها</div>';
-        return;
-    }
-    
-    container.innerHTML = currentHadiths.map((h, idx) => `
-        <div class="hadith-card royal-card p-6 shadow-sm mb-4">
-            <div class="flex items-start gap-3 mb-4">
-                <div class="bg-emerald-100 text-emerald-800 w-10 h-10 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0">
-                    ${((currentHadithPage - 1) * 10) + idx + 1}
-                </div>
-                <div class="flex-1">
-                    <p class="font-bold text-emerald-900 leading-relaxed text-base mb-3 quran-font">${h.arabic || h.hadithArabic || 'النص العربي غير متوفر'}</p>
-                    ${h.english || h.hadithEnglish ? `<p class="text-sm text-slate-600 leading-relaxed border-t pt-2 mt-2">${h.english || h.hadithEnglish}</p>` : ''}
-                </div>
-            </div>
-            <div class="flex justify-between items-center pt-3 border-t border-slate-100">
-                <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-bold">${h.reference || h.hadithNumber || ''}</span>
-                <button onclick="copyText('${(h.arabic || h.hadithArabic || '').replace(/'/g, "\\'")}')" class="text-slate-400 hover:text-emerald-600 transition">
-                    <i data-lucide="copy" class="w-4 h-4"></i>
-                </button>
-            </div>
+    container.innerHTML = `
+        <div class="mb-4 p-4 royal-card bg-emerald-50">
+            <h3 class="font-black text-emerald-900">${titles[book]}</h3>
+            <p class="text-sm text-slate-600">20 حديث مختار</p>
         </div>
-    `).join('');
-    
-    document.getElementById('hadith-page-info').innerText = `صفحة ${currentHadithPage} من ${totalHadithPages}`;
-    document.getElementById('prev-hadith').disabled = currentHadithPage === 1;
-    document.getElementById('next-hadith').disabled = currentHadithPage >= totalHadithPages;
+        ${hadiths.map((h, idx) => `
+            <div class="hadith-card royal-card p-6 shadow-sm mb-4">
+                <div class="flex items-start gap-3 mb-4">
+                    <div class="bg-emerald-100 text-emerald-800 w-10 h-10 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0">
+                        ${idx + 1}
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-emerald-900 leading-relaxed text-base mb-3 quran-font">${h.arabic}</p>
+                        ${h.english ? `<p class="text-sm text-slate-600 leading-relaxed border-t pt-2 mt-2">${h.english}</p>` : ''}
+                    </div>
+                </div>
+                <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                    <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-bold">${h.reference}</span>
+                    <button onclick="copyText('${h.arabic.replace(/'/g, "\\'")}')" class="text-slate-400 hover:text-emerald-600 transition">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('')}
+    `;
     
     lucide.createIcons();
-}
-
-async function changeHadithPage(direction) {
-    const newPage = currentHadithPage + direction;
-    if(newPage < 1 || newPage > totalHadithPages) return;
-    
-    currentHadithPage = newPage;
-    const container = document.getElementById('hadith-content');
-    container.innerHTML = '<div class="text-center py-10"><div class="animate-spin w-8 h-8 border-4 border-emerald-900 border-t-transparent rounded-full mx-auto"></div></div>';
-    
-    try {
-        const apiKey = '$2y$10$R2Q1h3H5J5Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z';
-        const res = await fetch(`https://hadithapi.com/api/hadith?apiKey=${apiKey}&book=${currentHadithBook}&limit=10&page=${newPage}`);
-        const data = await res.json();
-        
-        if(data.hadiths) {
-            currentHadiths = data.hadiths;
-            renderHadithPage();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-    } catch(e) {
-        container.innerHTML = '<div class="error-msg">تعذر تحميل الصفحة</div>';
-    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function copyText(text) {
     navigator.clipboard.writeText(text).then(() => {
-        alert('تم نسخ الحديث!');
+        showToast('تم نسخ الحديث!');
     }).catch(() => {
         const textarea = document.createElement('textarea');
         textarea.value = text;
@@ -709,11 +854,19 @@ function copyText(text) {
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        alert('تم نسخ الحديث!');
+        showToast('تم نسخ الحديث!');
     });
 }
 
-// وظائف السبحة الإلكترونية
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-emerald-900 text-white px-6 py-3 rounded-full shadow-lg z-[10001] text-sm font-bold';
+    toast.innerText = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+}
+
+// وظائف السبحة الإلكترونية المتقدمة
 function initTasbih() {
     const beadsContainer = document.getElementById('tasbih-beads');
     beadsContainer.innerHTML = '';
@@ -724,6 +877,23 @@ function initTasbih() {
         bead.innerText = i + 1;
         beadsContainer.appendChild(bead);
     }
+    updateTasbihDisplay();
+    updateDhikrListDisplay();
+}
+
+function updateDhikrListDisplay() {
+    const currentDhikr = adhkarList[currentDhikrIndex];
+    document.getElementById('current-dhikr').innerText = currentDhikr.text;
+    document.getElementById('dhikr-counter').innerText = `${currentDhikrIndex + 1} من ${adhkarList.length}`;
+    
+    // تحديث قائمة الأذكار المرئية
+    const listDisplay = document.getElementById('dhikr-list-display');
+    const displayList = adhkarList.map((d, i) => {
+        if(i === currentDhikrIndex) return `<span class="text-emerald-600 font-bold">${d.text}</span>`;
+        if(i < currentDhikrIndex) return `<span class="text-slate-400 line-through">${d.text}</span>`;
+        return `<span class="text-slate-400">${d.text}</span>`;
+    }).join(' ← ');
+    listDisplay.innerHTML = displayList;
 }
 
 function incrementTasbih() {
@@ -732,30 +902,62 @@ function incrementTasbih() {
         updateTasbihDisplay();
         
         // إحصائيات
-        const dhikr = document.getElementById('dhikr-select').value;
-        if(dhikr === 'سبحان الله') dhikrStats.subhan++;
-        else if(dhikr === 'الحمد لله') dhikrStats.hamd++;
-        else if(dhikr === 'الله أكبر') dhikrStats.akbar++;
+        const currentDhikr = adhkarList[currentDhikrIndex];
+        if(dhikrStats[currentDhikr.key] !== undefined) {
+            dhikrStats[currentDhikr.key]++;
+        }
         updateStats();
         
         // اهتزاز
         if(tasbihVibration && navigator.vibrate) {
-            navigator.vibrate(50);
+            navigator.vibrate(30);
         }
         
         // صوت طقطقة خفيف
         playClickSound();
+        
+        // التحقق من إكمال الـ33
+        if(tasbihCount === 33) {
+            setTimeout(() => {
+                if(autoMode && currentDhikrIndex < adhkarList.length - 1) {
+                    // الانتقال للذكر التالي تلقائياً
+                    nextDhikr();
+                } else if(autoMode && currentDhikrIndex === adhkarList.length - 1) {
+                    showToast('أحسنت! أكملت جميع الأذكار');
+                    if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                } else {
+                    showToast('أحسنت! أكملت 33 تسبيحة');
+                }
+            }, 300);
+        }
     }
+}
+
+function nextDhikr() {
+    currentDhikrIndex++;
+    tasbihCount = 0;
+    updateTasbihDisplay();
+    updateDhikrListDisplay();
+    showToast(`انتقلت إلى: ${adhkarList[currentDhikrIndex].text}`);
     
-    if(tasbihCount === 33) {
-        setTimeout(() => {
-            alert('أحسنت! أكملت 33 تسبيحة');
-        }, 100);
+    // اهتزاز قوي للإشعار بالانتقال
+    if(tasbihVibration && navigator.vibrate) {
+        navigator.vibrate([50, 100, 50]);
     }
 }
 
 function updateTasbihDisplay() {
     document.getElementById('tasbih-count').innerText = tasbihCount;
+    
+    // تحديث شريط التقدم
+    const progressPercent = (tasbihCount / 33) * 100;
+    document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+    
+    // تحديث الدائرة
+    const circle = document.getElementById('progress-circle');
+    const circumference = 339.292;
+    const offset = circumference - (tasbihCount / 33) * circumference;
+    circle.style.strokeDashoffset = offset;
     
     // تحديث الخرز
     for(let i = 0; i < 33; i++) {
@@ -774,13 +976,16 @@ function updateTasbihDisplay() {
 
 function resetTasbih() {
     tasbihCount = 0;
+    currentDhikrIndex = 0;
     updateTasbihDisplay();
+    updateDhikrListDisplay();
+    showToast('تم إعادة الضبط');
 }
 
-function changeDhikr() {
-    const select = document.getElementById('dhikr-select');
-    document.getElementById('current-dhikr').innerText = select.value;
-    resetTasbih();
+function toggleAutoMode() {
+    autoMode = !autoMode;
+    document.getElementById('auto-btn').innerText = autoMode ? 'تبديل تلقائي: ON' : 'تبديل تلقائي: OFF';
+    showToast(autoMode ? 'التبديل التلقائي مفعل' : 'التبديل التلقائي معطل');
 }
 
 function toggleVibration() {
@@ -792,10 +997,11 @@ function updateStats() {
     document.getElementById('stat-subhan').innerText = dhikrStats.subhan;
     document.getElementById('stat-hamd').innerText = dhikrStats.hamd;
     document.getElementById('stat-akbar').innerText = dhikrStats.akbar;
+    document.getElementById('stat-istighfar').innerText = dhikrStats.istighfar;
+    document.getElementById('stat-salah').innerText = dhikrStats.salah;
 }
 
 function playClickSound() {
-    // إنشاء صوت طقطقة بسيط باستخدام Web Audio API
     try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
@@ -804,14 +1010,14 @@ function playClickSound() {
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
         
-        oscillator.frequency.value = 800;
+        oscillator.frequency.value = 600;
         oscillator.type = 'sine';
         
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
         
         oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
+        oscillator.stop(audioContext.currentTime + 0.05);
     } catch(e) {}
 }
 
@@ -821,6 +1027,10 @@ document.addEventListener('keydown', (e) => {
         if(e.code === 'Space' || e.code === 'Enter') {
             e.preventDefault();
             incrementTasbih();
+        } else if(e.code === 'KeyR') {
+            resetTasbih();
+        } else if(e.code === 'KeyN') {
+            if(currentDhikrIndex < adhkarList.length - 1) nextDhikr();
         }
     }
 });
