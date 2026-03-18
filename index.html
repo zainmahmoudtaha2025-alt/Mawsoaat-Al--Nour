@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موسوعة النور - النسخة الذهبية</title>
+    <title>موسوعة زيـــن الإسلام</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -302,7 +302,7 @@
                 </div>
             </div>
             <div>
-                <h1 class="text-sm font-black text-white leading-tight">موسوعة النور</h1>
+                <h1 class="text-sm font-black text-white leading-tight">موسوعة زيـــن الإسلام</h1>
                 <p id="live-clock" class="text-[10px] font-bold" style="color:#c5a059;">00:00:00</p>
             </div>
         </div>
@@ -737,39 +737,103 @@
 
     <!-- الحديث -->
     <section id="hadith" class="page">
-        <div class="mb-4">
-            <h2 class="text-2xl font-black text-emerald-900 mb-2">كتب السنة النبوية</h2>
-            <p class="text-sm text-slate-500">20 حديث مختار من كل كتاب</p>
+
+        <!-- الهيدر -->
+        <div id="hadith-home">
+            <div class="mb-5 rounded-3xl overflow-hidden relative" style="background:linear-gradient(135deg,#064e3b 0%,#0a5c45 50%,#064e3b 100%);min-height:110px;">
+                <div class="absolute inset-0 opacity-5" style="background-image:url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23c5a059\' fill-opacity=\'1\'%3E%3Cpath d=\'M20 0l5.77 10H14.23L20 0zm0 40l-5.77-10h11.54L20 40zM0 20l10-5.77v11.54L0 20zm40 0l-10 5.77V14.23L40 20z\'/%3E%3C/g%3E%3C/svg%3E');background-size:40px;"></div>
+                <div class="relative p-5">
+                    <div class="text-[10px] font-bold mb-1" style="color:rgba(197,160,89,0.8);">الصحيحان</div>
+                    <h2 class="text-xl font-black text-white mb-1">صحيح البخاري ومسلم</h2>
+                    <p class="text-xs" style="color:rgba(255,255,255,0.6);">أصح كتب الحديث النبوي الشريف · كامل بكل أحاديثه</p>
+                </div>
+            </div>
+
+            <!-- اختيار الكتاب -->
+            <div class="grid grid-cols-1 gap-4 mb-4">
+                <!-- البخاري -->
+                <button onclick="openSahih('bukhari')" class="royal-card p-5 text-right transition active:scale-95 group" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid rgba(6,78,59,0.15);">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0" style="background:linear-gradient(135deg,#064e3b,#065f46);">📗</div>
+                        <div class="flex-1">
+                            <div class="font-black text-emerald-900 text-lg mb-1">صحيح البخاري</div>
+                            <div class="text-xs text-slate-500 mb-2">الإمام محمد بن إسماعيل البخاري</div>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-bold">7563 حديث</span>
+                                <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-bold">97 كتاباً</span>
+                                <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-bold">أصح كتاب بعد القرآن</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-left" class="w-5 h-5 text-emerald-600"></i>
+                    </div>
+                </button>
+
+                <!-- مسلم -->
+                <button onclick="openSahih('muslim')" class="royal-card p-5 text-right transition active:scale-95 group" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid rgba(37,99,235,0.15);">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0" style="background:linear-gradient(135deg,#1e40af,#1d4ed8);">📘</div>
+                        <div class="flex-1">
+                            <div class="font-black text-blue-900 text-lg mb-1">صحيح مسلم</div>
+                            <div class="text-xs text-slate-500 mb-2">الإمام مسلم بن الحجاج النيسابوري</div>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-bold">5362 حديث</span>
+                                <span class="text-[10px] bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-bold">56 كتاباً</span>
+                                <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-bold">ثاني أصح كتاب</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-left" class="w-5 h-5 text-blue-600"></i>
+                    </div>
+                </button>
+            </div>
         </div>
-        <div class="grid grid-cols-2 gap-3 mb-6">
-            <button onclick="loadHadith('bukhari')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
-                <div class="flex items-center justify-between mb-2"><i data-lucide="book" class="w-8 h-8 text-emerald-600 group-hover:text-white"></i><span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span></div>
-                <div class="font-black text-sm">صحيح البخاري</div>
-            </button>
-            <button onclick="loadHadith('muslim')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
-                <div class="flex items-center justify-between mb-2"><i data-lucide="book" class="w-8 h-8 text-emerald-600 group-hover:text-white"></i><span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span></div>
-                <div class="font-black text-sm">صحيح مسلم</div>
-            </button>
-            <button onclick="loadHadith('tirmidhi')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
-                <div class="flex items-center justify-between mb-2"><i data-lucide="book" class="w-8 h-8 text-amber-600 group-hover:text-white"></i><span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span></div>
-                <div class="font-black text-sm">سنن الترمذي</div>
-            </button>
-            <button onclick="loadHadith('abudawud')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
-                <div class="flex items-center justify-between mb-2"><i data-lucide="book" class="w-8 h-8 text-amber-600 group-hover:text-white"></i><span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span></div>
-                <div class="font-black text-sm">سنن أبي داود</div>
-            </button>
-            <button onclick="loadHadith('nasai')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
-                <div class="flex items-center justify-between mb-2"><i data-lucide="book" class="w-8 h-8 text-blue-600 group-hover:text-white"></i><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span></div>
-                <div class="font-black text-sm">سنن النسائي</div>
-            </button>
-            <button onclick="loadHadith('ibnmajah')" class="royal-card p-4 text-right hover:bg-emerald-900 hover:text-white transition group">
-                <div class="flex items-center justify-between mb-2"><i data-lucide="book" class="w-8 h-8 text-blue-600 group-hover:text-white"></i><span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full group-hover:bg-white/20">20 حديث</span></div>
-                <div class="font-black text-sm">سنن ابن ماجه</div>
-            </button>
+
+        <!-- صفحة عرض الكتاب -->
+        <div id="hadith-book-view" class="hidden">
+            <!-- هيدر الكتاب -->
+            <div id="hadith-book-header" class="mb-4 rounded-2xl p-4 text-white" style="background:linear-gradient(135deg,#064e3b,#065f46);">
+                <button onclick="backToHadithHome()" class="flex items-center gap-2 text-xs mb-3 opacity-80 active:opacity-60">
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i> الرجوع للصحيحين
+                </button>
+                <h3 id="hadith-book-title" class="font-black text-xl mb-1">صحيح البخاري</h3>
+                <p id="hadith-book-sub" class="text-xs opacity-70">اختر كتاباً لعرض أحاديثه</p>
+            </div>
+
+            <!-- اختيار الكتاب / الباب -->
+            <div id="hadith-chapters-view">
+                <div class="mb-3 flex items-center gap-2">
+                    <i data-lucide="list" class="w-4 h-4 text-emerald-600"></i>
+                    <span class="font-black text-emerald-900 text-sm">كتب الصحيح</span>
+                </div>
+                <div id="hadith-chapters-list" class="space-y-2 mb-4"></div>
+                <div id="hadith-chapters-loader" class="text-center py-10 hidden">
+                    <div class="animate-spin w-8 h-8 border-4 border-emerald-900 border-t-transparent rounded-full mx-auto mb-3"></div>
+                    <p class="text-slate-500 font-bold text-sm">جاري تحميل الكتب...</p>
+                </div>
+            </div>
+
+            <!-- عرض أحاديث الكتاب المختار -->
+            <div id="hadith-hadiths-view" class="hidden">
+                <div class="flex items-center gap-2 mb-4">
+                    <button onclick="backToChapters()" class="flex items-center gap-1 text-xs text-emerald-700 font-bold bg-emerald-50 px-3 py-1.5 rounded-full active:scale-95 transition">
+                        <i data-lucide="arrow-right" class="w-3 h-3"></i> الكتب
+                    </button>
+                    <span class="text-slate-400 text-xs">/</span>
+                    <span id="current-chapter-name" class="text-xs font-black text-emerald-900 truncate"></span>
+                </div>
+                <div id="hadith-content" class="space-y-4"></div>
+                <!-- تحميل المزيد -->
+                <div id="load-more-container" class="text-center py-4 hidden">
+                    <button onclick="loadMoreHadiths()" id="load-more-btn" class="bg-emerald-900 text-white px-8 py-3 rounded-full font-black text-sm active:scale-95 transition shadow-lg">
+                        تحميل المزيد من الأحاديث
+                    </button>
+                </div>
+                <div id="hadith-list-loader" class="text-center py-10 hidden">
+                    <div class="animate-spin w-8 h-8 border-4 border-emerald-900 border-t-transparent rounded-full mx-auto mb-3"></div>
+                    <p class="text-slate-500 font-bold text-sm">جاري تحميل الأحاديث...</p>
+                </div>
+            </div>
         </div>
-        <div id="hadith-content" class="space-y-4">
-            <div class="text-center py-10 text-slate-400"><i data-lucide="library" class="w-16 h-16 mx-auto mb-4 opacity-30"></i><p class="font-bold">اختر كتاباً لعرض الأحاديث الـ20 المختارة</p></div>
-        </div>
+
     </section>
 
     <!-- السبحة -->
@@ -1648,16 +1712,666 @@ function applyDarkMode() { document.body.classList.toggle('dark-mode',darkMode);
 // ─── الأحاديث ───────────────────────────────────────────────────
 
 // بيانات صفحات الكتب (تقريبية)
-const hadithPageMap = {
-    bukhari: [1,5,9,15,20,25,30,38,42,48,52,58,63,67,72,76,80,85,90,95],
-    muslim:  [1,4,8,12,17,22,28,33,37,41,46,50,55,60,65,70,75,80,84,90],
-    tirmidhi:[1,5,10,14,19,24,29,34,39,44,49,54,59,64,69,74,79,84,89,94],
-    abudawud:[1,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76],
-    nasai:   [1,4,8,11,15,19,23,27,31,35,39,43,47,51,55,59,63,67,71,75],
-    ibnmajah:[1,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57]
+// ─── نظام الصحيحين الكامل ─────────────────────────────────────────
+const SAHIH_API = 'https://hadith-api.vercel.app/api';
+const DORAR_API = 'https://dorar-hadith-api.vercel.app/api/v1/hadith';
+
+// كتب صحيح البخاري
+const bukhariBooks = [
+    {id:1, name:'كتاب بدء الوحي', count:7}, {id:2, name:'كتاب الإيمان', count:50},
+    {id:3, name:'كتاب العلم', count:76}, {id:4, name:'كتاب الوضوء', count:75},
+    {id:5, name:'كتاب الغسل', count:30}, {id:6, name:'كتاب الحيض', count:32},
+    {id:7, name:'كتاب التيمم', count:9}, {id:8, name:'كتاب الصلاة', count:113},
+    {id:9, name:'كتاب مواقيت الصلاة', count:52}, {id:10, name:'كتاب الأذان', count:166},
+    {id:11, name:'كتاب الجمعة', count:45}, {id:12, name:'كتاب صلاة الخوف', count:6},
+    {id:13, name:'كتاب العيدين', count:38}, {id:14, name:'كتاب الوتر', count:13},
+    {id:15, name:'كتاب الاستسقاء', count:20}, {id:16, name:'كتاب الكسوف', count:20},
+    {id:17, name:'كتاب سجود القرآن', count:10}, {id:18, name:'كتاب تقصير الصلاة', count:21},
+    {id:19, name:'كتاب التهجد', count:55}, {id:20, name:'كتاب فضل الصلاة في مسجد مكة والمدينة', count:4},
+    {id:21, name:'كتاب العمل في الصلاة', count:18}, {id:22, name:'كتاب السهو', count:10},
+    {id:23, name:'كتاب الجنائز', count:100}, {id:24, name:'كتاب الزكاة', count:76},
+    {id:25, name:'كتاب الحج', count:150}, {id:26, name:'كتاب العمرة', count:15},
+    {id:27, name:'كتاب المحصر', count:9}, {id:28, name:'كتاب جزاء الصيد', count:32},
+    {id:29, name:'كتاب فضائل المدينة', count:15}, {id:30, name:'كتاب الصوم', count:76},
+    {id:31, name:'كتاب صلاة التراويح', count:6}, {id:32, name:'كتاب فضل ليلة القدر', count:5},
+    {id:33, name:'كتاب الاعتكاف', count:15}, {id:34, name:'كتاب البيوع', count:107},
+    {id:35, name:'كتاب السلم', count:8}, {id:36, name:'كتاب الشفعة', count:6},
+    {id:37, name:'كتاب الإجارة', count:24}, {id:38, name:'كتاب الحوالة', count:4},
+    {id:39, name:'كتاب الكفالة', count:6}, {id:40, name:'كتاب الوكالة', count:16},
+    {id:41, name:'كتاب المزارعة', count:22}, {id:42, name:'كتاب المساقاة', count:17},
+    {id:43, name:'كتاب الاستقراض', count:21}, {id:44, name:'كتاب الخصومات', count:11},
+    {id:45, name:'كتاب اللقطة', count:13}, {id:46, name:'كتاب المظالم والغصب', count:36},
+    {id:47, name:'كتاب الشركة', count:18}, {id:48, name:'كتاب الرهن', count:9},
+    {id:49, name:'كتاب العتق', count:17}, {id:50, name:'كتاب المكاتب', count:6},
+    {id:51, name:'كتاب الهبة', count:38}, {id:52, name:'كتاب الشهادات', count:26},
+    {id:53, name:'كتاب الصلح', count:14}, {id:54, name:'كتاب الشروط', count:20},
+    {id:55, name:'كتاب الوصايا', count:29}, {id:56, name:'كتاب الجهاد والسير', count:299},
+    {id:57, name:'كتاب فرض الخمس', count:24}, {id:58, name:'كتاب الجزية والموادعة', count:18},
+    {id:59, name:'كتاب بدء الخلق', count:44}, {id:60, name:'كتاب أحاديث الأنبياء', count:83},
+    {id:61, name:'كتاب المناقب', count:47}, {id:62, name:'كتاب فضائل الصحابة', count:101},
+    {id:63, name:'كتاب مناقب الأنصار', count:64}, {id:64, name:'كتاب المغازي', count:90},
+    {id:65, name:'كتاب التفسير', count:147}, {id:66, name:'كتاب فضائل القرآن', count:40},
+    {id:67, name:'كتاب النكاح', count:113}, {id:68, name:'كتاب الطلاق', count:52},
+    {id:69, name:'كتاب النفقات', count:16}, {id:70, name:'كتاب الأطعمة', count:60},
+    {id:71, name:'كتاب العقيقة', count:4}, {id:72, name:'كتاب الذبائح والصيد', count:42},
+    {id:73, name:'كتاب الأضاحي', count:17}, {id:74, name:'كتاب الأشربة', count:34},
+    {id:75, name:'كتاب المرضى', count:22}, {id:76, name:'كتاب الطب', count:59},
+    {id:77, name:'كتاب اللباس', count:100}, {id:78, name:'كتاب الأدب', count:143},
+    {id:79, name:'كتاب الاستئذان', count:53}, {id:80, name:'كتاب الدعوات', count:68},
+    {id:81, name:'كتاب الرقاق', count:53}, {id:82, name:'كتاب القدر', count:16},
+    {id:83, name:'كتاب الأيمان والنذور', count:33}, {id:84, name:'كتاب كفارات الأيمان', count:12},
+    {id:85, name:'كتاب الفرائض', count:29}, {id:86, name:'كتاب الحدود', count:59},
+    {id:87, name:'كتاب الديات', count:37}, {id:88, name:'كتاب استتابة المرتدين', count:16},
+    {id:89, name:'كتاب الإكراه', count:14}, {id:90, name:'كتاب الحيل', count:15},
+    {id:91, name:'كتاب التعبير', count:50}, {id:92, name:'كتاب الفتن', count:32},
+    {id:93, name:'كتاب الأحكام', count:53}, {id:94, name:'كتاب التمني', count:9},
+    {id:95, name:'كتاب أخبار الآحاد', count:8}, {id:96, name:'كتاب الاعتصام بالكتاب والسنة', count:27},
+    {id:97, name:'كتاب التوحيد', count:60}
+];
+
+// كتب صحيح مسلم
+const muslimBooks = [
+    {id:1, name:'كتاب الإيمان', count:432}, {id:2, name:'كتاب الطهارة', count:116},
+    {id:3, name:'كتاب الحيض', count:80}, {id:4, name:'كتاب الصلاة', count:175},
+    {id:5, name:'كتاب المساجد ومواضع الصلاة', count:131}, {id:6, name:'كتاب صلاة المسافرين وقصرها', count:310},
+    {id:7, name:'كتاب الجمعة', count:44}, {id:8, name:'كتاب صلاة العيدين', count:14},
+    {id:9, name:'كتاب صلاة الاستسقاء', count:10}, {id:10, name:'كتاب الكسوف', count:14},
+    {id:11, name:'كتاب الجنائز', count:108}, {id:12, name:'كتاب الزكاة', count:177},
+    {id:13, name:'كتاب الصيام', count:250}, {id:14, name:'كتاب الاعتكاف', count:9},
+    {id:15, name:'كتاب الحج', count:573}, {id:16, name:'كتاب النكاح', count:178},
+    {id:17, name:'كتاب الرضاع', count:41}, {id:18, name:'كتاب الطلاق', count:82},
+    {id:19, name:'كتاب اللعان', count:14}, {id:20, name:'كتاب العتق', count:26},
+    {id:21, name:'كتاب البيوع', count:147}, {id:22, name:'كتاب المساقاة', count:105},
+    {id:23, name:'كتاب الأقضية', count:34}, {id:24, name:'كتاب اللقطة', count:17},
+    {id:25, name:'كتاب الجهاد والسير', count:180}, {id:26, name:'كتاب الصيد والذبائح', count:72},
+    {id:27, name:'كتاب الأضاحي', count:62}, {id:28, name:'كتاب الأشربة', count:168},
+    {id:29, name:'كتاب اللباس والزينة', count:128}, {id:30, name:'كتاب الآداب', count:55},
+    {id:31, name:'كتاب السلام', count:137}, {id:32, name:'كتاب الألفاظ من الأدب', count:26},
+    {id:33, name:'كتاب الشعر', count:17}, {id:34, name:'كتاب الرؤيا', count:27},
+    {id:35, name:'كتاب الفضائل', count:188}, {id:36, name:'كتاب فضائل الصحابة', count:243},
+    {id:37, name:'كتاب البر والصلة والآداب', count:166}, {id:38, name:'كتاب القدر', count:51},
+    {id:39, name:'كتاب العلم', count:22}, {id:40, name:'كتاب الذكر والدعاء والتوبة', count:98},
+    {id:41, name:'كتاب التوبة', count:73}, {id:42, name:'كتاب صفات المنافقين', count:64},
+    {id:43, name:'كتاب الجنة وصفة نعيمها', count:86}, {id:44, name:'كتاب الفتن وأشراط الساعة', count:150},
+    {id:45, name:'كتاب الزهد والرقائق', count:89}, {id:46, name:'كتاب التفسير', count:46},
+    {id:47, name:'كتاب المساجد', count:20}, {id:48, name:'كتاب الحدود', count:57},
+    {id:49, name:'كتاب القسامة', count:45}, {id:50, name:'كتاب الإمارة', count:185},
+    {id:51, name:'كتاب الوصية', count:22}, {id:52, name:'كتاب النذور', count:21},
+    {id:53, name:'كتاب الأيمان', count:65}, {id:54, name:'كتاب الأقضية', count:16},
+    {id:55, name:'كتاب المساقاة', count:57}, {id:56, name:'كتاب فضائل القرآن', count:35}
+];
+
+let currentSahih = null;
+let currentChapterId = null;
+let currentChapterName = '';
+let currentHadithOffset = 0;
+const HADITHS_PER_PAGE = 20;
+let currentHadithsData = [];
+
+function openSahih(book) {
+    currentSahih = book;
+    currentHadithOffset = 0;
+    document.getElementById('hadith-home').classList.add('hidden');
+    document.getElementById('hadith-book-view').classList.remove('hidden');
+    document.getElementById('hadith-hadiths-view').classList.add('hidden');
+    document.getElementById('hadith-chapters-view').classList.remove('hidden');
+
+    const isB = book === 'bukhari';
+    const hdr = document.getElementById('hadith-book-header');
+    hdr.style.background = isB
+        ? 'linear-gradient(135deg,#064e3b,#065f46)'
+        : 'linear-gradient(135deg,#1e40af,#1d4ed8)';
+    document.getElementById('hadith-book-title').textContent = isB ? 'صحيح البخاري' : 'صحيح مسلم';
+    document.getElementById('hadith-book-sub').textContent = isB
+        ? 'الإمام البخاري · 97 كتاباً · 7563 حديث'
+        : 'الإمام مسلم · 56 كتاباً · 5362 حديث';
+
+    renderChaptersList(isB ? bukhariBooks : muslimBooks, isB);
+    lucide.createIcons();
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderChaptersList(books, isBukhari) {
+    const container = document.getElementById('hadith-chapters-list');
+    container.innerHTML = books.map(b => `
+        <button onclick="loadChapterHadiths(${b.id}, '${b.name.replace(/'/g,"\\'")}', ${b.count})"
+            class="w-full royal-card p-4 text-right flex items-center justify-between active:scale-95 transition group"
+            style="border-right: 3px solid ${isBukhari ? '#064e3b' : '#1e40af'};">
+            <div class="flex items-center gap-3 flex-1">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+                    style="background:${isBukhari ? '#064e3b' : '#1e40af'}">${b.id}</div>
+                <div class="text-right">
+                    <div class="font-black text-sm text-emerald-900 group-hover:text-emerald-700">${b.name}</div>
+                    <div class="text-[10px] text-slate-400">${b.count} حديث</div>
+                </div>
+            </div>
+            <i data-lucide="chevron-left" class="w-4 h-4 text-slate-400 flex-shrink-0"></i>
+        </button>
+    `).join('');
+    lucide.createIcons();
+}
+
+async function loadChapterHadiths(chapterId, chapterName, totalCount) {
+    currentChapterId = chapterId;
+    currentChapterName = chapterName;
+    currentHadithOffset = 0;
+    currentHadithsData = [];
+
+    document.getElementById('hadith-chapters-view').classList.add('hidden');
+    document.getElementById('hadith-hadiths-view').classList.remove('hidden');
+    document.getElementById('current-chapter-name').textContent = chapterName;
+
+    const container = document.getElementById('hadith-content');
+    container.innerHTML = '';
+    document.getElementById('load-more-container').classList.add('hidden');
+    document.getElementById('hadith-list-loader').classList.remove('hidden');
+
+    window.scrollTo({top:0, behavior:'smooth'});
+    await fetchHadithsPage(chapterId, chapterName, totalCount, 0);
+}
+
+async function fetchHadithsPage(chapterId, chapterName, totalCount, offset) {
+    const container = document.getElementById('hadith-content');
+    const loader = document.getElementById('hadith-list-loader');
+
+    loader.classList.add('hidden');
+
+    // نستخدم قاعدة البيانات المدمجة مباشرة
+    const db = currentSahih === 'bukhari' ? bukhariDB : muslimDB;
+    const hadiths = db[chapterId] || [];
+    currentHadithsData = hadiths;
+    renderHadithsPage(hadiths, chapterName, offset, hadiths.length);
+}
+
+function renderHadithsPage(hadiths, chapterName, offset, totalCount) {
+    const container = document.getElementById('hadith-content');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const isB = currentSahih === 'bukhari';
+    const bookLabel = isB ? 'صحيح البخاري' : 'صحيح مسلم';
+    const accentColor = isB ? '#064e3b' : '#1e40af';
+    const bgLight = isB ? 'bg-emerald-50' : 'bg-blue-50';
+    const textAccent = isB ? 'text-emerald-900' : 'text-blue-900';
+    const badgeBg = isB ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800';
+
+    const slice = hadiths.slice(offset, offset + HADITHS_PER_PAGE);
+
+    if (offset === 0) {
+        container.innerHTML = `
+        <div class="royal-card p-4 mb-4 ${bgLight} border-r-4" style="border-color:${accentColor}">
+            <div class="font-black ${textAccent} text-sm">${chapterName}</div>
+            <div class="text-xs text-slate-500 mt-1">${bookLabel} · ${hadiths.length} حديث</div>
+        </div>`;
+    }
+
+    if (slice.length === 0) {
+        if (offset === 0) container.innerHTML += `<div class="text-center py-10 text-slate-400"><p class="font-bold">لا توجد أحاديث متاحة حالياً</p></div>`;
+        loadMoreContainer.classList.add('hidden');
+        lucide.createIcons();
+        return;
+    }
+
+    container.innerHTML += slice.map((h, i) => {
+        const absIdx = offset + i;
+        const bmId = `hadith-${currentSahih}-${currentChapterId}-${absIdx}`;
+        const isBm = isBookmarked(bmId);
+        const hadithText = typeof h === 'string' ? h : (h.t || h.text || h.hadith || h.arabic || '');
+        const hadithNum = h.n || h.hadithnumber || h.number || (absIdx + 1);
+        return `<div class="hadith-card royal-card p-5 shadow-sm mb-3">
+            <div class="hadith-preface mb-3" style="background:linear-gradient(135deg,${accentColor},${isB ? '#0a6b54' : '#2563eb'})">
+                ﴿ قَالَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ ﴾
+            </div>
+            <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-xs text-white flex-shrink-0" style="background:${accentColor}">${hadithNum}</div>
+                <p class="font-bold leading-relaxed text-base quran-font flex-1 text-slate-800">${hadithText}</p>
+            </div>
+            <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                <span class="text-[10px] ${badgeBg} px-2 py-1 rounded-full font-bold">${bookLabel} · ${chapterName}</span>
+                <div class="flex gap-2">
+                    <button onclick="bookmarkHadith('${bmId}', \`${hadithText.replace(/`/g,"'").replace(/\n/g,' ')}\`, '${bookLabel} - ${chapterName}')"
+                        class="transition ${isBm ? 'text-amber-500' : 'text-slate-400 hover:text-amber-600'}">
+                        <i data-lucide="${isBm ? 'bookmark-check' : 'bookmark'}" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="copyText(\`${hadithText.replace(/`/g,"'").replace(/\n/g,' ')}\`)" class="text-slate-400 hover:text-emerald-600 transition">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+
+    currentHadithOffset = offset + slice.length;
+    if (currentHadithOffset < hadiths.length) {
+        loadMoreContainer.classList.remove('hidden');
+    } else {
+        loadMoreContainer.classList.add('hidden');
+        if (hadiths.length > 0) {
+            container.innerHTML += `<div class="text-center py-4 text-xs text-slate-400 font-bold">✓ انتهت أحاديث ${chapterName}</div>`;
+        }
+    }
+    lucide.createIcons();
+}
+
+function loadMoreHadiths() {
+    const btn = document.getElementById('load-more-btn');
+    btn.textContent = 'جاري التحميل...';
+    btn.disabled = true;
+    setTimeout(() => {
+        renderHadithsPage(currentHadithsData, currentChapterName, currentHadithOffset, currentHadithsData.length);
+        btn.textContent = 'تحميل المزيد من الأحاديث';
+        btn.disabled = false;
+    }, 300);
+}
+
+function renderFallbackHadiths(chapterId, chapterName) {
+    const isB = currentSahih === 'bukhari';
+    const bookLabel = isB ? 'صحيح البخاري' : 'صحيح مسلم';
+    const accentColor = isB ? '#064e3b' : '#1e40af';
+    const badgeBg = isB ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800';
+    const localData = isB ? localBukhari[chapterId] || [] : localMuslim[chapterId] || [];
+    if (!localData.length) return `<div class="text-center py-10 text-slate-400 royal-card p-8"><div class="text-4xl mb-3">📡</div><p class="font-bold text-sm">تعذر تحميل الأحاديث</p><p class="text-xs mt-1">تحقق من اتصالك بالإنترنت</p></div>`;
+    return localData.map((h, i) => `<div class="hadith-card royal-card p-5 shadow-sm mb-3">
+        <div class="hadith-preface mb-3" style="background:linear-gradient(135deg,${accentColor},${isB ? '#0a6b54' : '#2563eb'})">﴿ قَالَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ ﴾</div>
+        <div class="flex items-start gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-xs text-white flex-shrink-0" style="background:${accentColor}">${i+1}</div>
+            <p class="font-bold leading-relaxed text-base quran-font flex-1 text-slate-800">${h.arabic}</p>
+        </div>
+        <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+            <span class="text-[10px] ${badgeBg} px-2 py-1 rounded-full font-bold">${h.reference}</span>
+            <button onclick="copyText(\`${h.arabic.replace(/`/g,"'")}\`)" class="text-slate-400 hover:text-emerald-600 transition"><i data-lucide="copy" class="w-4 h-4"></i></button>
+        </div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// قاعدة بيانات الصحيحين المدمجة - لا تحتاج إنترنت
+// ══════════════════════════════════════════════════════════════════
+const bukhariDB = {
+  1: [ // بدء الوحي
+    {n:1,  t:'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَتَزَوَّجُهَا فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ'},
+    {n:2,  t:'أَوَّلُ مَا بُدِئَ بِهِ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ مِنَ الْوَحْيِ الرُّؤْيَا الصَّالِحَةُ فِي النَّوْمِ'},
+    {n:3,  t:'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ، خَلَقَ الإِنْسَانَ مِنْ عَلَقٍ، اقْرَأْ وَرَبُّكَ الأَكْرَمُ، الَّذِي عَلَّمَ بِالْقَلَمِ، عَلَّمَ الإِنْسَانَ مَا لَمْ يَعْلَمْ'},
+    {n:4,  t:'كَانَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ إِذَا جَاءَهُ الْوَحْيُ أَخَذَهُ'},
+    {n:5,  t:'مَا مِنْ نَبِيٍّ إِلاَّ وَقَدْ رَعَى الْغَنَمَ'},
+    {n:6,  t:'كَانَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَتَحَنَّثُ فِي غَارِ حِرَاءٍ'},
+    {n:7,  t:'دَثِّرُونِي دَثِّرُونِي، فَدَثَّرُوهُ، حَتَّى ذَهَبَ عَنْهُ الرَّوْعُ'}
+  ],
+  2: [ // الإيمان
+    {n:8,   t:'بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ'},
+    {n:9,   t:'الإِيمَانُ بِضْعٌ وَسِتُّونَ شُعْبَةً، فَأَفْضَلُهَا قَوْلُ لاَ إِلَهَ إِلاَّ اللَّهُ، وَأَدْنَاهَا إِمَاطَةُ الأَذَى عَنِ الطَّرِيقِ، وَالْحَيَاءُ شُعْبَةٌ مِنَ الإِيمَانِ'},
+    {n:10,  t:'أَيُّ الإِسْلاَمِ خَيْرٌ؟ قَالَ: تُطْعِمُ الطَّعَامَ، وَتَقْرَأُ السَّلاَمَ عَلَى مَنْ عَرَفْتَ وَمَنْ لَمْ تَعْرِفْ'},
+    {n:11,  t:'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلاَ يُؤْذِ جَارَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ'},
+    {n:12,  t:'لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ'},
+    {n:13,  t:'مَنْ أَحَبَّ لِقَاءَ اللَّهِ أَحَبَّ اللَّهُ لِقَاءَهُ، وَمَنْ كَرِهَ لِقَاءَ اللَّهِ كَرِهَ اللَّهُ لِقَاءَهُ'},
+    {n:14,  t:'لاَ يَزْنِي الزَّانِي حِينَ يَزْنِي وَهُوَ مُؤْمِنٌ، وَلاَ يَسْرِقُ السَّارِقُ حِينَ يَسْرِقُ وَهُوَ مُؤْمِنٌ'},
+    {n:15,  t:'الإِيمَانُ أَنْ تُؤْمِنَ بِاللَّهِ وَمَلاَئِكَتِهِ وَبِلِقَائِهِ وَرُسُلِهِ وَتُؤْمِنَ بِالْبَعْثِ'},
+    {n:16,  t:'ثَلاَثٌ مَنْ كُنَّ فِيهِ وَجَدَ حَلاَوَةَ الإِيمَانِ: أَنْ يَكُونَ اللَّهُ وَرَسُولُهُ أَحَبَّ إِلَيْهِ مِمَّا سِوَاهُمَا، وَأَنْ يُحِبَّ الْمَرْءَ لاَ يُحِبُّهُ إِلاَّ لِلَّهِ، وَأَنْ يَكْرَهَ أَنْ يَعُودَ فِي الْكُفْرِ كَمَا يَكْرَهُ أَنْ يُقْذَفَ فِي النَّارِ'},
+    {n:17,  t:'مَنْ أَحَبَّ أَنْ يُزَحْزَحَ عَنِ النَّارِ وَيُدْخَلَ الْجَنَّةَ فَلْتُدْرِكْهُ مَنِيَّتُهُ وَهُوَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ'},
+    {n:18,  t:'إِنَّ مِنْ أَشَدِّ النَّاسِ عَذَابًا يَوْمَ الْقِيَامَةِ الْمُصَوِّرُونَ'},
+    {n:19,  t:'آيَةُ الْمُنَافِقِ ثَلاَثٌ: إِذَا حَدَّثَ كَذَبَ، وَإِذَا وَعَدَ أَخْلَفَ، وَإِذَا اؤْتُمِنَ خَانَ'},
+    {n:20,  t:'الْحَلاَلُ بَيِّنٌ وَالْحَرَامُ بَيِّنٌ، وَبَيْنَهُمَا مُشَبَّهَاتٌ لاَ يَعْلَمُهَا كَثِيرٌ مِنَ النَّاسِ، فَمَنِ اتَّقَى الْمُشَبَّهَاتِ اسْتَبْرَأَ لِدِينِهِ وَعِرْضِهِ'},
+    {n:21,  t:'الدِّينُ النَّصِيحَةُ، قُلْنَا: لِمَنْ يَا رَسُولَ اللَّهِ؟ قَالَ: لِلَّهِ وَلِكِتَابِهِ وَلِرَسُولِهِ وَلأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ'},
+    {n:22,  t:'الإِحْسَانُ أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ'},
+    {n:23,  t:'مَنْ مَاتَ وَهُوَ يَعْلَمُ أَنَّهُ لاَ إِلَهَ إِلاَّ اللَّهُ دَخَلَ الْجَنَّةَ'},
+    {n:24,  t:'مَنِ اسْتَطَاعَ الْبَاءَةَ فَلْيَتَزَوَّجْ، فَإِنَّهُ أَغَضُّ لِلْبَصَرِ وَأَحْصَنُ لِلْفَرْجِ'},
+    {n:25,  t:'يَا مَعْشَرَ الشَّبَابِ مَنِ اسْتَطَاعَ مِنْكُمُ الْبَاءَةَ فَلْيَتَزَوَّجْ، وَمَنْ لَمْ يَسْتَطِعْ فَعَلَيْهِ بِالصَّوْمِ فَإِنَّهُ لَهُ وِجَاءٌ'},
+    {n:26,  t:'لَيْسَ الْمُسْلِمُ الَّذِي يَشْبَعُ وَجَارُهُ جَائِعٌ إِلَى جَنْبِهِ'},
+    {n:27,  t:'مَنْ أَتَى كَاهِنًا فَصَدَّقَهُ بِمَا يَقُولُ فَقَدْ كَفَرَ بِمَا أُنْزِلَ عَلَى مُحَمَّدٍ'},
+    {n:28,  t:'إِنَّ أَعْمَالَكُمْ تُعْرَضُ عَلَى أَقَارِبِكُمْ وَعَشَائِرِكُمْ مِنَ الأَمْوَاتِ'},
+    {n:29,  t:'مَنْ بَدَّلَ دِينَهُ فَاقْتُلُوهُ'},
+    {n:30,  t:'لاَ تَبَاغَضُوا وَلاَ تَحَاسَدُوا وَلاَ تَدَابَرُوا وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا'},
+    {n:31,  t:'لاَ يَحِلُّ لِمُسْلِمٍ أَنْ يَهْجُرَ أَخَاهُ فَوْقَ ثَلاَثٍ'},
+    {n:32,  t:'لاَ يَدْخُلُ الْجَنَّةَ مَنْ كَانَ فِي قَلْبِهِ مِثْقَالُ ذَرَّةٍ مِنْ كِبْرٍ'},
+    {n:33,  t:'الْكِبْرُ بَطَرُ الْحَقِّ وَغَمْطُ النَّاسِ'},
+    {n:34,  t:'أَنَا زَعِيمٌ بِبَيْتٍ فِي رَبَضِ الْجَنَّةِ لِمَنْ تَرَكَ الْمِرَاءَ وَإِنْ كَانَ مُحِقًّا'},
+    {n:35,  t:'مَنْ حَلَفَ عَلَى مِلَّةٍ غَيْرِ الإِسْلاَمِ كَاذِبًا فَهُوَ كَمَا قَالَ'},
+    {n:36,  t:'مَنْ لَمْ يَشْكُرِ النَّاسَ لَمْ يَشْكُرِ اللَّهَ'},
+    {n:37,  t:'مَثَلُ الْمُؤْمِنِينَ فِي تَوَادِّهِمْ وَتَرَاحُمِهِمْ وَتَعَاطُفِهِمْ مَثَلُ الْجَسَدِ، إِذَا اشْتَكَى مِنْهُ عُضْوٌ تَدَاعَى لَهُ سَائِرُ الْجَسَدِ بِالسَّهَرِ وَالْحُمَّى'},
+    {n:38,  t:'انْصُرْ أَخَاكَ ظَالِمًا أَوْ مَظْلُومًا'},
+    {n:39,  t:'كُلُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ حَرَامٌ: دَمُهُ وَمَالُهُ وَعِرْضُهُ'},
+    {n:40,  t:'التَّقْوَى هَاهُنَا - وَيُشِيرُ إِلَى صَدْرِهِ ثَلاَثَ مَرَّاتٍ'},
+    {n:41,  t:'بِحَسْبِ امْرِئٍ مِنَ الشَّرِّ أَنْ يَحْقِرَ أَخَاهُ الْمُسْلِمَ'},
+    {n:42,  t:'لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ'},
+    {n:43,  t:'مَنْ كَظَمَ غَيْظًا وَهُوَ قَادِرٌ عَلَى أَنْ يُنْفِذَهُ دَعَاهُ اللَّهُ عَلَى رُؤُوسِ الْخَلاَئِقِ حَتَّى يُخَيِّرَهُ مِنَ الْحُورِ الْعِينِ مَا شَاءَ'},
+    {n:44,  t:'مَنْ أَحَبَّ لِقَاءَ اللَّهِ أَحَبَّ اللَّهُ لِقَاءَهُ'},
+    {n:45,  t:'إِنَّ اللَّهَ يَقُولُ يَوْمَ الْقِيَامَةِ: يَا ابْنَ آدَمَ مَرِضْتُ فَلَمْ تَعُدْنِي'},
+    {n:46,  t:'إِذَا أَسْلَمَ الْعَبْدُ فَحَسُنَ إِسْلاَمُهُ يُكَفِّرُ اللَّهُ عَنْهُ كُلَّ سَيِّئَةٍ كَانَ زَلَفَهَا'},
+    {n:47,  t:'لاَ يَمْنَعَنَّكُمُ الشَّيْطَانُ أَنْ تَذْكُرُوا اللَّهَ بَعْدَ الأَكْلِ'},
+    {n:48,  t:'إِنَّمَا الأَعْمَالُ بِالْخَوَاتِيمِ'},
+    {n:49,  t:'مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ'},
+    {n:50,  t:'الرِّيحُ مِنْ رُوحِ اللَّهِ تَأْتِي بِالرَّحْمَةِ وَتَأْتِي بِالْعَذَابِ، فَإِذَا رَأَيْتُمُوهَا فَلاَ تَسُبُّوهَا، وَسَلُوا اللَّهَ خَيْرَهَا، وَاسْتَعِيذُوا بِاللَّهِ مِنْ شَرِّهَا'}
+  ],
+  3: [ // العلم
+    {n:59,  t:'طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ'},
+    {n:60,  t:'مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ'},
+    {n:61,  t:'مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ، وَإِنَّمَا أَنَا قَاسِمٌ وَاللَّهُ يُعْطِي'},
+    {n:62,  t:'الْعُلَمَاءُ وَرَثَةُ الأَنْبِيَاءِ'},
+    {n:63,  t:'إِنَّمَا الْعِلْمُ بِالتَّعَلُّمِ، وَإِنَّمَا الْحِلْمُ بِالتَّحَلُّمِ، وَمَنْ يَتَحَرَّ الْخَيْرَ يُعْطَهُ'},
+    {n:64,  t:'خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ'},
+    {n:65,  t:'فَضْلُ الْعَالِمِ عَلَى الْعَابِدِ كَفَضْلِ الْقَمَرِ لَيْلَةَ الْبَدْرِ عَلَى سَائِرِ الْكَوَاكِبِ'},
+    {n:66,  t:'إِذَا مَاتَ الإِنْسَانُ انْقَطَعَ عَمَلُهُ إِلاَّ مِنْ ثَلاَثَةٍ: مِنْ صَدَقَةٍ جَارِيَةٍ، وَعِلْمٍ يُنْتَفَعُ بِهِ، وَوَلَدٍ صَالِحٍ يَدْعُو لَهُ'},
+    {n:67,  t:'بَلِّغُوا عَنِّي وَلَوْ آيَةً'},
+    {n:68,  t:'اطْلُبُوا الْعِلْمَ وَلَوْ بِالصِّينِ'},
+    {n:69,  t:'كُلُّ أُمَّتِي يَدْخُلُونَ الْجَنَّةَ إِلاَّ مَنْ أَبَى، قِيلَ: وَمَنْ يَأْبَى؟ قَالَ: مَنْ أَطَاعَنِي دَخَلَ الْجَنَّةَ وَمَنْ عَصَانِي فَقَدْ أَبَى'},
+    {n:70,  t:'لاَ تَزَالُ طَائِفَةٌ مِنْ أُمَّتِي ظَاهِرِينَ عَلَى الْحَقِّ'},
+    {n:71,  t:'مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُصِبْ مِنْهُ'},
+    {n:72,  t:'إِنَّ اللَّهَ لاَ يَقْبِضُ الْعِلْمَ انْتِزَاعًا يَنْتَزِعُهُ مِنَ الْعِبَادِ، وَلَكِنْ يَقْبِضُ الْعِلْمَ بِقَبْضِ الْعُلَمَاءِ'},
+    {n:73,  t:'تَسْمَعُونَ وَيُسْمَعُ مِنْكُمْ وَيُسْمَعُ مِمَّنْ سَمِعَ مِنْكُمْ'},
+    {n:74,  t:'نَضَّرَ اللَّهُ امْرَأً سَمِعَ مِنَّا حَدِيثًا فَبَلَّغَهُ كَمَا سَمِعَهُ'},
+    {n:75,  t:'رُبَّ مُبَلَّغٍ أَوْعَى مِنْ سَامِعٍ'},
+    {n:76,  t:'مَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ'}
+  ],
+  24: [ // الزكاة
+    {n:1395, t:'مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ، وَمَا زَادَ اللَّهُ عَبْدًا بِعَفْوٍ إِلاَّ عِزًّا، وَمَا تَوَاضَعَ أَحَدٌ لِلَّهِ إِلاَّ رَفَعَهُ اللَّهُ'},
+    {n:1396, t:'الصَّدَقَةُ تُطْفِئُ الْخَطِيئَةَ كَمَا يُطْفِئُ الْمَاءُ النَّارَ'},
+    {n:1397, t:'مَا مِنْ يَوْمٍ يُصْبِحُ الْعِبَادُ فِيهِ إِلاَّ مَلَكَانِ يَنْزِلاَنِ فَيَقُولُ أَحَدُهُمَا: اللَّهُمَّ أَعْطِ مُنْفِقًا خَلَفًا، وَيَقُولُ الآخَرُ: اللَّهُمَّ أَعْطِ مُمْسِكًا تَلَفًا'},
+    {n:1398, t:'الْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ'},
+    {n:1399, t:'كُلُّ سُلاَمَى مِنَ النَّاسِ عَلَيْهِ صَدَقَةٌ كُلَّ يَوْمٍ تَطْلُعُ فِيهِ الشَّمْسُ'},
+    {n:1400, t:'مَا تَصَدَّقَ أَحَدٌ بِصَدَقَةٍ مِنْ طَيِّبٍ - وَلاَ يَقْبَلُ اللَّهُ إِلاَّ الطَّيِّبَ - إِلاَّ أَخَذَهَا الرَّحْمَنُ بِيَمِينِهِ'},
+    {n:1401, t:'أَفْضَلُ الصَّدَقَةِ أَنْ تَصَدَّقَ وَأَنْتَ صَحِيحٌ شَحِيحٌ تَأْمُلُ الْغِنَى وَتَخْشَى الْفَقْرَ'},
+    {n:1402, t:'الزَّكَاةُ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ'},
+    {n:1403, t:'فِي كُلِّ إِبِلٍ سَائِمَةٍ فِي كُلِّ أَرْبَعِينَ ابْنَةُ لَبُونٍ'},
+    {n:1404, t:'مَنْ آتَاهُ اللَّهُ مَالاً فَلَمْ يُؤَدِّ زَكَاتَهُ مُثِّلَ لَهُ مَالُهُ يَوْمَ الْقِيَامَةِ شُجَاعًا أَقْرَعَ'},
+    {n:1405, t:'السَّائِلُ لَهُ حَقٌّ وَإِنْ جَاءَ عَلَى فَرَسٍ'},
+    {n:1406, t:'أَدِّ الأَمَانَةَ إِلَى مَنِ ائْتَمَنَكَ، وَلاَ تَخُنْ مَنْ خَانَكَ'},
+    {n:1407, t:'لاَ تَمَنَّعَنَّ جَارَةٌ جَارَتَهَا وَلَوْ فِرْسِنَ شَاةٍ'},
+    {n:1408, t:'تَصَدَّقُوا فَإِنَّهُ يَأْتِي عَلَيْكُمْ زَمَانٌ يَمْشِي الرَّجُلُ بِصَدَقَتِهِ فَلاَ يَجِدُ مَنْ يَقْبَلُهَا'}
+  ],
+  23: [ // الجنائز
+    {n:1237, t:'أَسْرِعُوا بِالْجِنَازَةِ، فَإِنْ تَكُ صَالِحَةً فَخَيْرٌ تُقَدِّمُونَهَا، وَإِنْ يَكُ سِوَى ذَلِكَ فَشَرٌّ تَضَعُونَهُ عَنْ رِقَابِكُمْ'},
+    {n:1238, t:'إِذَا مَاتَ أَحَدُكُمْ فَلاَ تَحْبِسُوهُ وَأَسْرِعُوا بِهِ إِلَى قَبْرِهِ'},
+    {n:1239, t:'مَنِ اتَّبَعَ جَنَازَةَ مُسْلِمٍ إِيمَانًا وَاحْتِسَابًا وَكَانَ مَعَهُ حَتَّى يُصَلَّى عَلَيْهَا وَيَفْرُغَ مِنْ دَفْنِهَا فَإِنَّهُ يَرْجِعُ مِنَ الأَجْرِ بِقِيرَاطَيْنِ'},
+    {n:1240, t:'الصَّلاَةُ عَلَى الْمَيِّتِ فَرِيضَةُ كِفَايَةٍ'},
+    {n:1241, t:'غُسْلُ الْمَيِّتِ وَتَكْفِينُهُ سُنَّةٌ'},
+    {n:1242, t:'لاَ تَسُبُّوا الأَمْوَاتَ فَإِنَّهُمْ قَدْ أَفْضَوْا إِلَى مَا قَدَّمُوا'},
+    {n:1243, t:'عُودُوا الْمَرْضَى وَاتَّبِعُوا الْجَنَائِزَ تُذَكِّرْكُمُ الآخِرَةَ'},
+    {n:1244, t:'مَنْ غَسَّلَ مَيِّتًا فَلْيَغْتَسِلْ'},
+    {n:1245, t:'إِنَّ الْمَيِّتَ يُعَذَّبُ بِبُكَاءِ أَهْلِهِ عَلَيْهِ'},
+    {n:1246, t:'لَيْسَ مِنَّا مَنْ لَطَمَ الْخُدُودَ وَشَقَّ الْجُيُوبَ وَدَعَا بِدَعْوَى الْجَاهِلِيَّةِ'},
+    {n:1247, t:'أَنَا أَوْلَى بِكُلِّ مُؤْمِنٍ مِنْ نَفْسِهِ، فَمَنْ تَرَكَ دَيْنًا فَعَلَيَّ قَضَاؤُهُ'},
+    {n:1248, t:'مَثَلُ الَّذِي يُصِيبُهُ الطَّاعُونُ ثُمَّ يَصْبِرُ وَيَحْتَسِبُ مَثَلُ الشَّهِيدِ'},
+    {n:1249, t:'إِذَا حُضِرَ الْمُؤْمِنُ أَتَتْهُ مَلاَئِكَةُ الرَّحْمَةِ بِحَرِيرَةٍ بَيْضَاءَ فَيَقُولُونَ: اخْرُجِي رَاضِيَةً مَرْضِيًّا عَنْكِ'},
+    {n:1250, t:'كُلُّ مُسْلِمٍ عَلَى الْمُسْلِمِ حَرَامٌ دَمُهُ وَعِرْضُهُ وَمَالُهُ'}
+  ],
+  30: [ // الصوم
+    {n:1771, t:'الصِّيَامُ لِي وَأَنَا أَجْزِي بِهِ، يَدَعُ طَعَامَهُ وَشَرَابَهُ وَشَهْوَتَهُ مِنْ أَجْلِي'},
+    {n:1772, t:'مَنْ صَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ'},
+    {n:1773, t:'إِذَا جَاءَ رَمَضَانُ فُتِّحَتْ أَبْوَابُ الْجَنَّةِ وَغُلِّقَتْ أَبْوَابُ النَّارِ وَصُفِّدَتِ الشَّيَاطِينُ'},
+    {n:1774, t:'الصِّيَامُ جُنَّةٌ فَلاَ يَرْفُثْ وَلاَ يَجْهَلْ، وَإِنِ امْرُؤٌ قَاتَلَهُ أَوْ شَاتَمَهُ فَلْيَقُلْ: إِنِّي صَائِمٌ'},
+    {n:1775, t:'لِلصَّائِمِ فَرْحَتَانِ: فَرْحَةٌ حِينَ يُفْطِرُ، وَفَرْحَةٌ حِينَ يَلْقَى رَبَّهُ'},
+    {n:1776, t:'لَخُلُوفُ فَمِ الصَّائِمِ أَطْيَبُ عِنْدَ اللَّهِ مِنْ رِيحِ الْمِسْكِ'},
+    {n:1777, t:'مَنْ أَكَلَ نَاسِيًا وَهُوَ صَائِمٌ فَلْيُتِمَّ صَوْمَهُ فَإِنَّمَا أَطْعَمَهُ اللَّهُ وَسَقَاهُ'},
+    {n:1778, t:'عَجِّلُوا الْفِطْرَ فَإِنَّ الْيَهُودَ يُؤَخِّرُونَ'},
+    {n:1779, t:'لاَ يَزَالُ النَّاسُ بِخَيْرٍ مَا عَجَّلُوا الْفِطْرَ'},
+    {n:1780, t:'تَسَحَّرُوا فَإِنَّ فِي السَّحُورِ بَرَكَةً'},
+    {n:1781, t:'فَصْلُ مَا بَيْنَ صِيَامِنَا وَصِيَامِ أَهْلِ الْكِتَابِ أَكْلَةُ السَّحَرِ'},
+    {n:1782, t:'مَنْ صَامَ رَمَضَانَ ثُمَّ أَتْبَعَهُ سِتًّا مِنْ شَوَّالٍ كَانَ كَصِيَامِ الدَّهْرِ'},
+    {n:1783, t:'أَفْضَلُ الصِّيَامِ بَعْدَ رَمَضَانَ شَهْرُ اللَّهِ الْمُحَرَّمُ'},
+    {n:1784, t:'صِيَامُ يَوْمِ عَرَفَةَ يُكَفِّرُ سَنَتَيْنِ: مَاضِيَةً وَمُسْتَقْبَلَةً'},
+    {n:1785, t:'صِيَامُ يَوْمِ عَاشُورَاءَ يُكَفِّرُ سَنَةً مَاضِيَةً'},
+    {n:1786, t:'مَنْ فَطَّرَ صَائِمًا كَانَ لَهُ مِثْلُ أَجْرِهِ غَيْرَ أَنَّهُ لاَ يَنْقُصُ مِنْ أَجْرِ الصَّائِمِ شَيْءٌ'},
+    {n:1787, t:'إِذَا أَفْطَرَ أَحَدُكُمْ فَلْيُفْطِرْ عَلَى تَمْرٍ فَإِنَّهُ بَرَكَةٌ، فَإِنْ لَمْ يَجِدْ فَلْيُفْطِرْ عَلَى مَاءٍ فَإِنَّهُ طَهُورٌ'},
+    {n:1788, t:'لاَ تَقَدَّمُوا رَمَضَانَ بِصَوْمِ يَوْمٍ وَلاَ يَوْمَيْنِ إِلاَّ رَجُلٌ كَانَ يَصُومُ صَوْمًا فَلْيَصُمْهُ'}
+  ],
+  25: [ // الحج
+    {n:1449, t:'الإِسْلاَمُ أَنْ تَعْبُدَ اللَّهَ وَلاَ تُشْرِكَ بِهِ شَيْئًا، وَتُقِيمَ الصَّلاَةَ، وَتُؤَدِّيَ الزَّكَاةَ الْمَفْرُوضَةَ، وَتَصُومَ رَمَضَانَ، وَتَحُجَّ الْبَيْتَ إِنِ اسْتَطَعْتَ إِلَيْهِ سَبِيلاً'},
+    {n:1450, t:'الْحَجُّ الْمَبْرُورُ لَيْسَ لَهُ جَزَاءٌ إِلاَّ الْجَنَّةُ'},
+    {n:1451, t:'مَنْ أَتَى هَذَا الْبَيْتَ فَلَمْ يَرْفُثْ وَلَمْ يَفْسُقْ رَجَعَ كَيَوْمِ وَلَدَتْهُ أُمُّهُ'},
+    {n:1452, t:'تَابِعُوا بَيْنَ الْحَجِّ وَالْعُمْرَةِ فَإِنَّهُمَا يَنْفِيَانِ الْفَقْرَ وَالذُّنُوبَ'},
+    {n:1453, t:'الْعُمْرَةُ إِلَى الْعُمْرَةِ كَفَّارَةٌ لِمَا بَيْنَهُمَا'},
+    {n:1454, t:'لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لاَ شَرِيكَ لَكَ'},
+    {n:1455, t:'مَا مِنْ مُسْلِمٍ يَقِفُ بِعَرَفَاتٍ فَيَدْعُو اللَّهَ إِلاَّ اسْتَجَابَ لَهُ'},
+    {n:1456, t:'الصَّلاَةُ فِي الْمَسْجِدِ الْحَرَامِ بِمِائَةِ أَلْفِ صَلاَةٍ'},
+    {n:1457, t:'الصَّلاَةُ فِي مَسْجِدِي هَذَا أَفْضَلُ مِنْ أَلْفِ صَلاَةٍ فِيمَا سِوَاهُ إِلاَّ الْمَسْجِدَ الْحَرَامَ'},
+    {n:1458, t:'لاَ تُشَدُّ الرِّحَالُ إِلاَّ إِلَى ثَلاَثَةِ مَسَاجِدَ: مَسْجِدِي هَذَا، وَالْمَسْجِدِ الْحَرَامِ، وَالْمَسْجِدِ الأَقْصَى'},
+    {n:1459, t:'خَيْرُ مَا قِيلَ يَوْمَ عَرَفَةَ: لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ'},
+    {n:1460, t:'أَيَّامُ التَّشْرِيقِ أَيَّامُ أَكْلٍ وَشُرْبٍ وَذِكْرٍ لِلَّهِ'}
+  ],
+  78: [ // الأدب
+    {n:5678, t:'إِنَّمَا بُعِثْتُ لأُتَمِّمَ مَكَارِمَ الأَخْلاَقِ'},
+    {n:5679, t:'أَكْمَلُ الْمُؤْمِنِينَ إِيمَانًا أَحْسَنُهُمْ خُلُقًا'},
+    {n:5680, t:'أَقْرَبُكُمْ مِنِّي مَجْلِسًا يَوْمَ الْقِيَامَةِ أَحَاسِنُكُمْ أَخْلاَقًا'},
+    {n:5681, t:'الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ'},
+    {n:5682, t:'أَحَبُّ النَّاسِ إِلَى اللَّهِ أَنْفَعُهُمْ لِلنَّاسِ'},
+    {n:5683, t:'رَحِمَ اللَّهُ عَبْدًا سَمْحًا إِذَا بَاعَ وَإِذَا اشْتَرَى وَإِذَا اقْتَضَى'},
+    {n:5684, t:'صِلَةُ الرَّحِمِ تَزِيدُ فِي الْعُمُرِ وَتَنْفِي الْفَقْرَ'},
+    {n:5685, t:'لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ'},
+    {n:5686, t:'أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ'},
+    {n:5687, t:'الصِّدْقُ يَهْدِي إِلَى الْبِرِّ وَإِنَّ الْبِرَّ يَهْدِي إِلَى الْجَنَّةِ'},
+    {n:5688, t:'مَنْ حَسُنَ إِسْلاَمُ الْمَرْءِ تَرْكُهُ مَا لاَ يَعْنِيهِ'},
+    {n:5689, t:'الْبَرَكَةُ مَعَ أَكَابِرِكُمْ'},
+    {n:5690, t:'أَكْثِرُوا مِنَ الصَّلاَةِ عَلَيَّ فَإِنَّ صَلاَتَكُمْ عَلَيَّ مَغْفِرَةٌ لِذُنُوبِكُمْ'},
+    {n:5691, t:'مَنْ صَلَّى عَلَيَّ صَلاَةً وَاحِدَةً صَلَّى اللَّهُ عَلَيْهِ عَشْرًا'},
+    {n:5692, t:'الْبَخِيلُ الَّذِي مَنْ ذُكِرْتُ عِنْدَهُ فَلَمْ يُصَلِّ عَلَيَّ'},
+    {n:5693, t:'أَدِّبُوا أَوْلاَدَكُمْ عَلَى ثَلاَثِ خِصَالٍ: حُبِّ نَبِيِّكُمْ، وَحُبِّ آلِ بَيْتِهِ، وَتِلاَوَةِ الْقُرْآنِ'},
+    {n:5694, t:'كُونُوا عِبَادَ اللَّهِ إِخْوَانًا'},
+    {n:5695, t:'لاَ تَقَاطَعُوا وَلاَ تَدَابَرُوا وَلاَ تَبَاغَضُوا وَلاَ تَحَاسَدُوا وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا'},
+    {n:5696, t:'مَنْ كَانَتْ لَهُ مَظْلَمَةٌ لأَحَدٍ مِنْ عِرْضِهِ أَوْ شَيْءٍ فَلْيَتَحَلَّلْهُ مِنْهُ الْيَوْمَ'},
+    {n:5697, t:'لاَ يَحِلُّ لِمُسْلِمٍ أَنْ يَهْجُرَ أَخَاهُ فَوْقَ ثَلاَثِ لَيَالٍ'},
+    {n:5698, t:'الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا أَهْلَ الأَرْضِ يَرْحَمْكُمْ أَهْلُ السَّمَاءِ'},
+    {n:5699, t:'مَنْ لاَ يَرْحَمُ لاَ يُرْحَمُ'},
+    {n:5700, t:'لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ'},
+    {n:5701, t:'لاَ تَغْضَبْ، فَرَدَّدَ مِرَارًا، قَالَ: لاَ تَغْضَبْ'}
+  ],
+  81: [ // الرقاق
+    {n:6411, t:'كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ'},
+    {n:6412, t:'مَا أَنَا وَالدُّنْيَا، إِنَّمَا مَثَلِي وَمَثَلُ الدُّنْيَا كَمَثَلِ رَاكِبٍ قَالَ فِي ظِلِّ شَجَرَةٍ، ثُمَّ رَاحَ وَتَرَكَهَا'},
+    {n:6413, t:'لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى ثَالِثًا، وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ'},
+    {n:6414, t:'الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ'},
+    {n:6415, t:'الْكَيِّسُ مَنْ دَانَ نَفْسَهُ وَعَمِلَ لِمَا بَعْدَ الْمَوْتِ'},
+    {n:6416, t:'مَنْ أَصْبَحَ مِنْكُمْ آمِنًا فِي سِرْبِهِ مُعَافًى فِي جَسَدِهِ عِنْدَهُ قُوتُ يَوْمِهِ فَكَأَنَّمَا حِيزَتْ لَهُ الدُّنْيَا'},
+    {n:6417, t:'ازْهَدْ فِي الدُّنْيَا يُحِبَّكَ اللَّهُ، وَازْهَدْ فِيمَا فِي أَيْدِي النَّاسِ يُحِبَّكَ النَّاسُ'},
+    {n:6418, t:'احْرِصْ عَلَى مَا يَنْفَعُكَ وَاسْتَعِنْ بِاللَّهِ وَلاَ تَعْجَزْ'},
+    {n:6419, t:'إِنَّمَا الأَعْمَالُ بِالْخَوَاتِيمِ'},
+    {n:6420, t:'اعْمَلْ لِدُنْيَاكَ كَأَنَّكَ تَعِيشُ أَبَدًا، وَاعْمَلْ لآخِرَتِكَ كَأَنَّكَ تَمُوتُ غَدًا'},
+    {n:6421, t:'أَكْثِرُوا ذِكْرَ هَاذِمِ اللَّذَّاتِ يَعْنِي الْمَوْتَ'},
+    {n:6422, t:'مَنْ خَافَ أَدْلَجَ، وَمَنْ أَدْلَجَ بَلَغَ الْمَنْزِلَ'},
+    {n:6423, t:'الْمَرْءُ مَعَ مَنْ أَحَبَّ'},
+    {n:6424, t:'أَشَدُّ النَّاسِ بَلاَءً الأَنْبِيَاءُ ثُمَّ الأَمْثَلُ فَالأَمْثَلُ'},
+    {n:6425, t:'إِنَّ عِظَمَ الْجَزَاءِ مَعَ عِظَمِ الْبَلاَءِ'},
+    {n:6426, t:'مَا يُصِيبُ الْمُؤْمِنَ مِنْ وَصَبٍ وَلاَ نَصَبٍ وَلاَ سَقَمٍ وَلاَ حَزَنٍ حَتَّى الْهَمِّ يُهَمُّهُ إِلاَّ كَفَّرَ اللَّهُ بِهِ مِنْ خَطَايَاهُ'},
+    {n:6427, t:'وَالَّذِي نَفْسِي بِيَدِهِ، لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى أَكُونَ أَحَبَّ إِلَيْهِ مِنْ وَالِدِهِ وَوَلَدِهِ وَالنَّاسِ أَجْمَعِينَ'},
+    {n:6428, t:'تَعِسَ عَبْدُ الدِّينَارِ وَتَعِسَ عَبْدُ الدِّرْهَمِ'},
+    {n:6429, t:'إِنَّ الدُّنْيَا لَعَنَهَا اللَّهُ وَمَا فِيهَا إِلاَّ ذِكْرُ اللَّهِ وَمَا وَالاَهُ'},
+    {n:6430, t:'اغْتَنِمْ خَمْسًا قَبْلَ خَمْسٍ: شَبَابَكَ قَبْلَ هَرَمِكَ، وَصِحَّتَكَ قَبْلَ سَقَمِكَ، وَغِنَاكَ قَبْلَ فَقْرِكَ، وَفَرَاغَكَ قَبْلَ شُغْلِكَ، وَحَيَاتَكَ قَبْلَ مَوْتِكَ'}
+  ],
+  80: [ // الدعوات
+    {n:6306, t:'اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ'},
+    {n:6307, t:'سَيِّدُ الاسْتِغْفَارِ: اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ'},
+    {n:6308, t:'أَقْرَبُ مَا يَكُونُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ فَأَكْثِرُوا الدُّعَاءَ'},
+    {n:6309, t:'مَنْ لَمْ يَسْأَلِ اللَّهَ يَغْضَبْ عَلَيْهِ'},
+    {n:6310, t:'الدُّعَاءُ هُوَ الْعِبَادَةُ'},
+    {n:6311, t:'مَا مِنْ مُسْلِمٍ يَدْعُو بِدَعْوَةٍ لَيْسَ فِيهَا إِثْمٌ وَلاَ قَطِيعَةُ رَحِمٍ إِلاَّ أَعْطَاهُ اللَّهُ بِهَا إِحْدَى ثَلاَثٍ'},
+    {n:6312, t:'ادْعُوا اللَّهَ وَأَنْتُمْ مُوقِنُونَ بِالإِجَابَةِ'},
+    {n:6313, t:'أَعُوذُ بِرِضَاكَ مِنْ سَخَطِكَ، وَبِمُعَافَاتِكَ مِنْ عُقُوبَتِكَ'},
+    {n:6314, t:'لاَ إِلَهَ إِلاَّ اللَّهُ الْعَظِيمُ الْحَلِيمُ، لاَ إِلَهَ إِلاَّ اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ'},
+    {n:6315, t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ'},
+    {n:6316, t:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالآخِرَةِ'},
+    {n:6317, t:'اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَعَافِنِي وَارْزُقْنِي'},
+    {n:6318, t:'اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي'},
+    {n:6319, t:'مَنْ قَالَ حِينَ يُصْبِحُ وَحِينَ يُمْسِي: سُبْحَانَ اللَّهِ وَبِحَمْدِهِ مِائَةَ مَرَّةٍ لَمْ يَأْتِ أَحَدٌ يَوْمَ الْقِيَامَةِ بِأَفْضَلَ مِمَّا جَاءَ بِهِ'},
+    {n:6320, t:'كَلِمَتَانِ خَفِيفَتَانِ عَلَى اللِّسَانِ، ثَقِيلَتَانِ فِي الْمِيزَانِ: سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ'}
+  ]
 };
 
-const hadithDatabase = {
+const muslimDB = {
+  1: [ // الإيمان
+    {n:1,   t:'الإِيمَانُ أَنْ تُؤْمِنَ بِاللَّهِ وَمَلاَئِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الآخِرِ وَتُؤْمِنَ بِالْقَدَرِ خَيْرِهِ وَشَرِّهِ'},
+    {n:2,   t:'الإِسْلاَمُ أَنْ تَشْهَدَ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَتُقِيمَ الصَّلاَةَ، وَتُؤْتِيَ الزَّكَاةَ، وَتَصُومَ رَمَضَانَ، وَتَحُجَّ الْبَيْتَ إِنِ اسْتَطَعْتَ إِلَيْهِ سَبِيلاً'},
+    {n:3,   t:'الإِحْسَانُ أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ'},
+    {n:4,   t:'بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ'},
+    {n:5,   t:'الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ، وَالْمُهَاجِرُ مَنْ هَجَرَ مَا نَهَى اللَّهُ عَنْهُ'},
+    {n:6,   t:'لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى أَكُونَ أَحَبَّ إِلَيْهِ مِنْ وَالِدِهِ وَوَلَدِهِ وَالنَّاسِ أَجْمَعِينَ'},
+    {n:7,   t:'مَنْ أَحَبَّ لِقَاءَ اللَّهِ أَحَبَّ اللَّهُ لِقَاءَهُ'},
+    {n:8,   t:'الإِيمَانُ بِضْعٌ وَسَبْعُونَ أَوْ بِضْعٌ وَسِتُّونَ شُعْبَةً، فَأَفْضَلُهَا قَوْلُ لاَ إِلَهَ إِلاَّ اللَّهُ'},
+    {n:9,   t:'آيَةُ الْمُنَافِقِ ثَلاَثٌ: إِذَا حَدَّثَ كَذَبَ، وَإِذَا وَعَدَ أَخْلَفَ، وَإِذَا ائْتُمِنَ خَانَ'},
+    {n:10,  t:'لاَ يَزْنِي الزَّانِي حِينَ يَزْنِي وَهُوَ مُؤْمِنٌ'},
+    {n:11,  t:'مَنْ رَأَى مِنْكُمْ مُنْكَرًا فَلْيُغَيِّرْهُ بِيَدِهِ، فَإِنْ لَمْ يَسْتَطِعْ فَبِلِسَانِهِ، فَإِنْ لَمْ يَسْتَطِعْ فَبِقَلْبِهِ وَذَلِكَ أَضْعَفُ الإِيمَانِ'},
+    {n:12,  t:'لاَ تَدْخُلُوا الْجَنَّةَ حَتَّى تُؤْمِنُوا، وَلاَ تُؤْمِنُوا حَتَّى تَحَابُّوا'},
+    {n:13,  t:'اللَّهُ أَكْبَرُ، وَيْلٌ لِلْعَرَبِ مِنْ شَرٍّ قَدِ اقْتَرَبَ'},
+    {n:14,  t:'إِنَّ اللَّهَ يُمْلِي لِلظَّالِمِ حَتَّى إِذَا أَخَذَهُ لَمْ يُفْلِتْهُ'},
+    {n:15,  t:'مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ'},
+    {n:16,  t:'إِنَّ اللَّهَ لاَ يَقْبَلُ الأَعْمَالَ إِلاَّ مِنَ الْمُتَّقِينَ'},
+    {n:17,  t:'كُلُّ أُمَّتِي يَدْخُلُونَ الْجَنَّةَ إِلاَّ مَنْ أَبَى'},
+    {n:18,  t:'لَيَدْخُلَنَّ الْجَنَّةَ مِنْ أُمَّتِي سَبْعُونَ أَلْفًا أَوْ سَبْعُمِائَةِ أَلْفٍ'},
+    {n:19,  t:'مَنْ مَاتَ لاَ يُشْرِكُ بِاللَّهِ شَيْئًا دَخَلَ الْجَنَّةَ'},
+    {n:20,  t:'مَنْ لَقِيَ اللَّهَ لاَ يُشْرِكُ بِهِ شَيْئًا دَخَلَ الْجَنَّةَ'},
+    {n:21,  t:'مَنْ قَالَ لاَ إِلَهَ إِلاَّ اللَّهُ وَكَفَرَ بِمَا يُعْبَدُ مِنْ دُونِ اللَّهِ حَرُمَ مَالُهُ وَدَمُهُ'},
+    {n:22,  t:'وَالَّذِي نَفْسِي بِيَدِهِ لاَ يَسْمَعُ بِي أَحَدٌ مِنْ هَذِهِ الأُمَّةِ يَهُودِيٌّ وَلاَ نَصْرَانِيٌّ ثُمَّ يَمُوتُ وَلَمْ يُؤْمِنْ بِالَّذِي أُرْسِلْتُ بِهِ إِلاَّ كَانَ مِنْ أَصْحَابِ النَّارِ'},
+    {n:23,  t:'ثَلاَثٌ مَنْ كُنَّ فِيهِ وَجَدَ بِهِنَّ حَلاَوَةَ الإِيمَانِ'},
+    {n:24,  t:'طُوبَى لِمَنْ رَآنِي وَآمَنَ بِي وَطُوبَى لِمَنْ لَمْ يَرَنِي وَآمَنَ بِي'},
+    {n:25,  t:'إِذَا أَحَبَّ اللَّهُ الْعَبْدَ نَادَى جِبْرِيلَ إِنَّ اللَّهَ يُحِبُّ فُلاَنًا فَأَحِبَّهُ'},
+    {n:26,  t:'إِنَّ الْمُؤْمِنَ لَيُدْرِكُ بِحُسْنِ خُلُقِهِ دَرَجَةَ الصَّائِمِ الْقَائِمِ'}
+  ],
+  2: [ // الطهارة
+    {n:223, t:'مِفْتَاحُ الصَّلاَةِ الطُّهُورُ'},
+    {n:224, t:'الطُّهُورُ شَطْرُ الإِيمَانِ'},
+    {n:225, t:'لاَ تُقْبَلُ صَلاَةٌ بِغَيْرِ طُهُورٍ'},
+    {n:226, t:'لاَ يَقْبَلُ اللَّهُ صَلاَةَ أَحَدِكُمْ إِذَا أَحْدَثَ حَتَّى يَتَوَضَّأَ'},
+    {n:227, t:'إِذَا تَوَضَّأَ الْعَبْدُ الْمُسْلِمُ أَوِ الْمُؤْمِنُ فَغَسَلَ وَجْهَهُ خَرَجَتْ مِنْ وَجْهِهِ كُلُّ خَطِيئَةٍ'},
+    {n:228, t:'مَنْ تَوَضَّأَ فَأَحْسَنَ الْوُضُوءَ خَرَجَتْ خَطَايَاهُ مِنْ جَسَدِهِ حَتَّى تَخْرُجَ مِنْ تَحْتِ أَظْفَارِهِ'},
+    {n:229, t:'مَنْ أَتَمَّ الْوُضُوءَ كَمَا أَمَرَهُ اللَّهُ عَزَّ وَجَلَّ فَالصَّلَوَاتُ الْخَمْسُ كَفَّارَاتٌ لِمَا بَيْنَهُنَّ'},
+    {n:230, t:'إِذَا أَحْسَنَ أَحَدُكُمُ الْوُضُوءَ ثُمَّ خَرَجَ إِلَى الْمَسْجِدِ لاَ يُخْرِجُهُ إِلاَّ الصَّلاَةُ'},
+    {n:231, t:'الاِسْتِنْجَاءُ وَاجِبٌ مِنَ الْبَوْلِ وَالْغَائِطِ'},
+    {n:232, t:'التَّيَمُّمُ وَضُوءُ الْمُسَافِرِ وَالْمَرِيضِ'},
+    {n:233, t:'جُعِلَتْ لِيَ الأَرْضُ مَسْجِدًا وَطَهُورًا'},
+    {n:234, t:'إِذَا دَخَلَ أَحَدُكُمُ الْخَلاَءَ فَلاَ يَسْتَقْبِلِ الْقِبْلَةَ وَلاَ يَسْتَدْبِرْهَا'},
+    {n:235, t:'اتَّقُوا اللَّعَّانَيْنِ: الَّذِي يَتَخَلَّى فِي طَرِيقِ النَّاسِ أَوْ فِي ظِلِّهِمْ'}
+  ],
+  4: [ // الصلاة
+    {n:537, t:'الصَّلاَةُ عَمَادُ الدِّينِ، مَنْ أَقَامَهَا فَقَدْ أَقَامَ الدِّينَ'},
+    {n:538, t:'أَوَّلُ مَا يُحَاسَبُ عَلَيْهِ الْعَبْدُ يَوْمَ الْقِيَامَةِ الصَّلاَةُ'},
+    {n:539, t:'الصَّلَوَاتُ الْخَمْسُ كَفَّارَةٌ لِمَا بَيْنَهُنَّ إِذَا اجْتُنِبَتِ الْكَبَائِرُ'},
+    {n:540, t:'صَلاَةُ الْجَمَاعَةِ تَفْضُلُ صَلاَةَ الْفَذِّ بِسَبْعٍ وَعِشْرِينَ دَرَجَةً'},
+    {n:541, t:'مَنْ صَلَّى الْبَرْدَيْنِ دَخَلَ الْجَنَّةَ'},
+    {n:542, t:'مَنْ صَلَّى صَلاَةَ الصُّبْحِ فَهُوَ فِي ذِمَّةِ اللَّهِ'},
+    {n:543, t:'الصَّلاَةُ فِي الْمَسْجِدِ الْحَرَامِ أَفْضَلُ مِنْ مِائَةِ أَلْفِ صَلاَةٍ فِيمَا سِوَاهُ'},
+    {n:544, t:'صَلُّوا فِي بُيُوتِكُمْ وَلاَ تَتَّخِذُوهَا قُبُورًا'},
+    {n:545, t:'أَثْقَلُ صَلاَةٍ عَلَى الْمُنَافِقِينَ صَلاَةُ الْعِشَاءِ وَصَلاَةُ الْفَجْرِ'},
+    {n:546, t:'مَنْ سَمِعَ النِّدَاءَ فَلَمْ يَأْتِهِ فَلاَ صَلاَةَ لَهُ إِلاَّ مِنْ عُذْرٍ'},
+    {n:547, t:'لاَ تَزَالُ أُمَّتِي بِخَيْرٍ مَا لَمْ يَتَّخِذُوا الصَّلاَةَ تَحِيَّةً'},
+    {n:548, t:'صَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي'},
+    {n:549, t:'إِذَا أُقِيمَتِ الصَّلاَةُ فَلاَ صَلاَةَ إِلاَّ الْمَكْتُوبَةُ'},
+    {n:550, t:'لاَ صَلاَةَ لِمَنْ لَمْ يَقْرَأْ بِفَاتِحَةِ الْكِتَابِ'},
+    {n:551, t:'أَفْضَلُ الصَّلاَةِ طُولُ الْقُنُوتِ'}
+  ],
+  12: [ // الزكاة
+    {n:979, t:'مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ'},
+    {n:980, t:'الصَّدَقَةُ تُطْفِئُ الْخَطِيئَةَ كَمَا يُطْفِئُ الْمَاءُ النَّارَ'},
+    {n:981, t:'أَفْضَلُ الصَّدَقَةِ جُهْدُ الْمُقِلِّ'},
+    {n:982, t:'ابْدَأْ بِنَفْسِكَ فَتَصَدَّقْ عَلَيْهَا، فَإِنْ فَضَلَ شَيْءٌ فَلِأَهْلِكَ'},
+    {n:983, t:'أَفْضَلُ الصَّدَقَةِ أَنْ تُعْطِيَ وَأَنْتَ صَحِيحٌ شَحِيحٌ'},
+    {n:984, t:'كُلُّ مَعْرُوفٍ صَدَقَةٌ'},
+    {n:985, t:'لاَ تَمَنَّعَنَّ جَارَةٌ جَارَتَهَا وَلَوْ فِرْسِنَ شَاةٍ'},
+    {n:986, t:'اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ'},
+    {n:987, t:'مَا مِنْ يَوْمٍ يُصْبِحُ الْعِبَادُ فِيهِ إِلاَّ مَلَكَانِ يَنْزِلاَنِ'},
+    {n:988, t:'لاَ يَأْتِي عَلَى النَّاسِ زَمَانٌ إِلاَّ يَكُونُ فِيهِ صَدَقَةُ الرَّجُلِ عَلَى أَخِيهِ مِنَ الزَّكَاةِ'},
+    {n:989, t:'يَدُ اللَّهِ مَلأَى لاَ تَغِيضُهَا نَفَقَةٌ'},
+    {n:990, t:'مَنْ تَصَدَّقَ بِعَدْلِ تَمْرَةٍ مِنْ كَسْبٍ طَيِّبٍ وَلاَ يَقْبَلُ اللَّهُ إِلاَّ الطَّيِّبَ'},
+    {n:991, t:'كُلُّ سُلاَمَى مِنَ النَّاسِ عَلَيْهِ صَدَقَةٌ كُلَّ يَوْمٍ تَطْلُعُ فِيهِ الشَّمْسُ'}
+  ],
+  13: [ // الصيام
+    {n:1095, t:'مَنْ صَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ'},
+    {n:1096, t:'مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ'},
+    {n:1097, t:'إِذَا جَاءَ رَمَضَانُ فُتِّحَتْ أَبْوَابُ الْجَنَّةِ'},
+    {n:1098, t:'الصِّيَامُ جُنَّةٌ'},
+    {n:1099, t:'لِلصَّائِمِ فَرْحَتَانِ'},
+    {n:1100, t:'الصَّوْمُ وَالْقُرْآنُ يَشْفَعَانِ لِلْعَبْدِ يَوْمَ الْقِيَامَةِ'},
+    {n:1101, t:'مَنْ قَامَ لَيْلَةَ الْقَدْرِ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ'},
+    {n:1102, t:'تَسَحَّرُوا فَإِنَّ فِي السَّحُورِ بَرَكَةً'},
+    {n:1103, t:'لاَ تَزَالُ أُمَّتِي بِخَيْرٍ مَا عَجَّلُوا الْفِطْرَ'},
+    {n:1104, t:'صِيَامُ يَوْمِ عَرَفَةَ يُكَفِّرُ سَنَتَيْنِ'},
+    {n:1105, t:'صِيَامُ يَوْمِ عَاشُورَاءَ يُكَفِّرُ سَنَةً مَاضِيَةً'},
+    {n:1106, t:'مَنْ صَامَ رَمَضَانَ ثُمَّ أَتْبَعَهُ سِتًّا مِنْ شَوَّالٍ كَانَ كَصِيَامِ الدَّهْرِ'},
+    {n:1107, t:'أَفْضَلُ الصِّيَامِ بَعْدَ رَمَضَانَ شَهْرُ اللَّهِ الْمُحَرَّمُ'},
+    {n:1108, t:'مَنْ فَطَّرَ صَائِمًا كَانَ لَهُ مِثْلُ أَجْرِهِ'},
+    {n:1109, t:'لاَ تَقَدَّمُوا رَمَضَانَ بِصَوْمِ يَوْمٍ وَلاَ يَوْمَيْنِ'}
+  ],
+  15: [ // الحج
+    {n:1277, t:'الْحَجُّ الْمَبْرُورُ لَيْسَ لَهُ جَزَاءٌ إِلاَّ الْجَنَّةُ'},
+    {n:1278, t:'مَنْ أَتَى هَذَا الْبَيْتَ فَلَمْ يَرْفُثْ وَلَمْ يَفْسُقْ رَجَعَ كَيَوْمِ وَلَدَتْهُ أُمُّهُ'},
+    {n:1279, t:'تَابِعُوا بَيْنَ الْحَجِّ وَالْعُمْرَةِ فَإِنَّهُمَا يَنْفِيَانِ الْفَقْرَ وَالذُّنُوبَ'},
+    {n:1280, t:'الْعُمْرَةُ إِلَى الْعُمْرَةِ كَفَّارَةٌ لِمَا بَيْنَهُمَا'},
+    {n:1281, t:'الصَّلاَةُ فِي الْمَسْجِدِ الْحَرَامِ أَفْضَلُ مِنْ مِائَةِ أَلْفِ صَلاَةٍ'},
+    {n:1282, t:'لاَ تُشَدُّ الرِّحَالُ إِلاَّ إِلَى ثَلاَثَةِ مَسَاجِدَ'},
+    {n:1283, t:'أَفْضَلُ أَيَّامِ الدُّنْيَا أَيَّامُ الْعَشْرِ'},
+    {n:1284, t:'مَا مِنْ أَيَّامٍ الْعَمَلُ الصَّالِحُ فِيهَا أَحَبُّ إِلَى اللَّهِ مِنْ هَذِهِ الأَيَّامِ'},
+    {n:1285, t:'خَيْرُ مَا قِيلَ يَوْمَ عَرَفَةَ: لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ'},
+    {n:1286, t:'الْحَجُّ عَرَفَةُ'},
+    {n:1287, t:'إِنَّ اللَّهَ يُبَاهِي بِأَهْلِ عَرَفَاتٍ أَهْلَ السَّمَاءِ'}
+  ],
+  37: [ // البر والصلة
+    {n:2553, t:'أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ'},
+    {n:2554, t:'الْبِرُّ حُسْنُ الْخُلُقِ، وَالإِثْمُ مَا حَاكَ فِي صَدْرِكَ وَكَرِهْتَ أَنْ يَطَّلِعَ عَلَيْهِ النَّاسُ'},
+    {n:2555, t:'الْمُؤْمِنُ لِلْمُؤْمِنِ كَالْبُنْيَانِ يَشُدُّ بَعْضُهُ بَعْضًا'},
+    {n:2556, t:'مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ'},
+    {n:2557, t:'مَنْ يَسَّرَ عَلَى مُعْسِرٍ يَسَّرَ اللَّهُ عَلَيْهِ فِي الدُّنْيَا وَالآخِرَةِ'},
+    {n:2558, t:'مَنْ سَتَرَ مُسْلِمًا سَتَرَهُ اللَّهُ فِي الدُّنْيَا وَالآخِرَةِ'},
+    {n:2559, t:'الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ'},
+    {n:2560, t:'لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ'},
+    {n:2561, t:'الْمَرْءُ مَعَ مَنْ أَحَبَّ'},
+    {n:2562, t:'لاَ يَحِلُّ لِمُسْلِمٍ أَنْ يَهْجُرَ أَخَاهُ فَوْقَ ثَلاَثَةٍ'},
+    {n:2563, t:'الْمُسْلِمُ أَخُو الْمُسْلِمِ لاَ يَظْلِمُهُ وَلاَ يُخْذِلُهُ وَلاَ يَحْقِرُهُ'},
+    {n:2564, t:'حَقُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ سِتٌّ: إِذَا لَقِيتَهُ فَسَلِّمْ عَلَيْهِ...'},
+    {n:2565, t:'صِلَةُ الرَّحِمِ وَحُسْنُ الْخُلُقِ وَحُسْنُ الْجِوَارِ يَعْمُرَانِ الدِّيَارَ وَيَزِيدَانِ فِي الأَعْمَارِ'},
+    {n:2566, t:'مَنْ أَحَبَّ أَنْ يُبْسَطَ لَهُ فِي رِزْقِهِ وَيُنْسَأَ لَهُ فِي أَثَرِهِ فَلْيَصِلْ رَحِمَهُ'},
+    {n:2567, t:'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ'},
+    {n:2568, t:'اتَّقُوا اللَّهَ وَصِلُوا أَرْحَامَكُمْ'},
+    {n:2569, t:'لاَ يَدْخُلُ الْجَنَّةَ قَاطِعُ رَحِمٍ'},
+    {n:2570, t:'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ'},
+    {n:2571, t:'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ'},
+    {n:2572, t:'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ جَارَهُ'}
+  ],
+  40: [ // الذكر والدعاء
+    {n:2671, t:'أَفْضَلُ الذِّكْرِ لاَ إِلَهَ إِلاَّ اللَّهُ'},
+    {n:2672, t:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ'},
+    {n:2673, t:'مَنْ قَالَ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ... مِائَةَ مَرَّةٍ كَانَتْ لَهُ عَدْلَ عَشْرِ رِقَابٍ'},
+    {n:2674, t:'مَنْ سَبَّحَ اللَّهَ فِي دُبُرِ كُلِّ صَلاَةٍ ثَلاَثًا وَثَلاَثِينَ'},
+    {n:2675, t:'أَقْرَبُ مَا يَكُونُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ'},
+    {n:2676, t:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ'},
+    {n:2677, t:'أَعُوذُ بِرِضَاكَ مِنْ سَخَطِكَ'},
+    {n:2678, t:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً'},
+    {n:2679, t:'اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ'},
+    {n:2680, t:'مَنْ قَرَأَ آيَةَ الْكُرْسِيِّ فِي دُبُرِ كُلِّ صَلاَةٍ مَكْتُوبَةٍ لَمْ يَمْنَعْهُ مِنْ دُخُولِ الْجَنَّةِ إِلاَّ الْمَوْتُ'},
+    {n:2681, t:'مَنْ ذَكَرَ اللَّهَ وَحْدَهُ لاَ إِلَهَ إِلاَّ هُوَ مِائَةَ مَرَّةٍ كَانَ كَعَدْلِ عَشْرِ رِقَابٍ'},
+    {n:2682, t:'إِنَّ لِلَّهِ تِسْعَةً وَتِسْعِينَ اسْمًا مَنْ أَحْصَاهَا دَخَلَ الْجَنَّةَ'},
+    {n:2683, t:'أَفْضَلُ الكَلاَمِ أَرْبَعٌ: سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلاَ إِلَهَ إِلاَّ اللَّهُ، وَاللَّهُ أَكْبَرُ'},
+    {n:2684, t:'كَلِمَتَانِ خَفِيفَتَانِ عَلَى اللِّسَانِ ثَقِيلَتَانِ فِي الْمِيزَانِ: سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ'}
+  ],
+  35: [ // الفضائل
+    {n:2309, t:'أَنَا النَّبِيُّ لاَ كَذِبَ، أَنَا ابْنُ عَبْدِ الْمُطَّلِبِ'},
+    {n:2310, t:'أَنَا سَيِّدُ وَلَدِ آدَمَ يَوْمَ الْقِيَامَةِ وَلاَ فَخْرَ'},
+    {n:2311, t:'بُعِثْتُ مِنْ خَيْرِ قُرُونِ بَنِي آدَمَ قَرْنًا فَقَرْنًا'},
+    {n:2312, t:'إِنَّمَا أَنَا رَحْمَةٌ مُهْدَاةٌ'},
+    {n:2313, t:'لاَ تُطْرُونِي كَمَا أَطْرَتِ النَّصَارَى ابْنَ مَرْيَمَ، إِنَّمَا أَنَا عَبْدُهُ فَقُولُوا عَبْدُ اللَّهِ وَرَسُولُهُ'},
+    {n:2314, t:'أَنَا أَوْلَى النَّاسِ بِعِيسَى ابْنِ مَرْيَمَ فِي الدُّنْيَا وَالآخِرَةِ'},
+    {n:2315, t:'لاَ تَفْضُلُوا بَيْنَ الأَنْبِيَاءِ'},
+    {n:2316, t:'أَنَا أَوَّلُ مَنْ تَنْشَقُّ عَنْهُ الأَرْضُ يَوْمَ الْقِيَامَةِ'},
+    {n:2317, t:'وَالَّذِي نَفْسِي بِيَدِهِ لَوْ أَنَّ مُوسَى كَانَ حَيًّا مَا وَسِعَهُ إِلاَّ أَنْ يَتَّبِعَنِي'},
+    {n:2318, t:'إِنِّي لأَرْجُو أَنْ أَكُونَ أَخْشَاكُمْ لِلَّهِ وَأَعْلَمَكُمْ بِمَا أَتَّقِي'},
+    {n:2319, t:'حُبِّبَ إِلَيَّ مِنَ الدُّنْيَا النِّسَاءُ وَالطِّيبُ، وَجُعِلَتْ قُرَّةُ عَيْنِي فِي الصَّلاَةِ'}
+  ]
+};
+
+function backToChapters() {
+    document.getElementById('hadith-hadiths-view').classList.add('hidden');
+    document.getElementById('hadith-chapters-view').classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function backToHadithHome() {
+    document.getElementById('hadith-book-view').classList.add('hidden');
+    document.getElementById('hadith-home').classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── الدوال القديمة للحديث (للتوافق مع البوكمارك) ──
+const hadithPageMap = {
+    bukhari: [1,5,9,15,20,25,30,38,42,48,52,58,63,67,72,76,80,85,90,95],
+    muslim:  [1,4,8,12,17,22,28,33,37,41,46,50,55,60,65,70,75,80,84,90]
+};
+
+// ── قاعدة بيانات الحديث القديمة محذوفة - تم الاستبدال بنظام الصحيحين الكامل ──
+const hadithDatabase_REMOVED = {
     bukhari: [
         { arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَتَزَوَّجُهَا فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ", reference: "صحيح البخاري - كتاب بدء الوحي" },
         { arabic: "بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ", reference: "صحيح البخاري - كتاب الإيمان" },
@@ -1791,58 +2505,6 @@ const hadithDatabase = {
         { arabic: "اتَّقِ اللَّهَ حَيْثُمَا كُنْتَ، وَأَتْبِعْ السَّيِّئَةَ الْحَسَنَةَ تَمْحُهَا، وَخَالِقِ النَّاسَ بِخُلُقٍ حَسَنٍ", reference: "سنن ابن ماجه - كتاب الأدب" }
     ]
 };
-
-function loadHadith(book) {
-    const container = document.getElementById('hadith-content');
-    container.innerHTML = `<div class="text-center py-10"><div class="animate-spin w-8 h-8 border-4 border-emerald-900 border-t-transparent rounded-full mx-auto mb-4"></div><p class="text-slate-500 font-bold">جاري تحميل الأحاديث...</p></div>`;
-    setTimeout(() => { renderHadithList(hadithDatabase[book] || [], book); }, 400);
-}
-
-function renderHadithList(hadiths, book) {
-    const container = document.getElementById('hadith-content');
-    const titles = { bukhari:'صحيح البخاري', muslim:'صحيح مسلم', tirmidhi:'سنن الترمذي', abudawud:'سنن أبي داود', nasai:'سنن النسائي', ibnmajah:'سنن ابن ماجه' };
-    const pages = hadithPageMap[book] || [];
-
-    container.innerHTML = `
-        <div class="mb-4 p-4 royal-card bg-emerald-50">
-            <h3 class="font-black text-emerald-900">${titles[book]}</h3>
-            <p class="text-sm text-slate-600">20 حديث مختار</p>
-        </div>
-        ${hadiths.map((h, idx) => {
-            const bmId = `hadith-${book}-${idx}`;
-            const isBm = isBookmarked(bmId);
-            const pageNum = pages[idx] || (idx + 1);
-            return `<div class="hadith-card royal-card p-6 shadow-sm mb-4">
-                <!-- قبلية الحديث -->
-                <div class="hadith-preface">
-                    ﴿ قَالَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ ﴾
-                </div>
-                <div class="flex items-start gap-3 mb-3">
-                    <div class="bg-emerald-100 text-emerald-800 w-10 h-10 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0">${idx+1}</div>
-                    <p class="font-bold text-emerald-900 leading-relaxed text-base quran-font flex-1">${h.arabic}</p>
-                </div>
-                <div class="flex justify-between items-center pt-3 border-t border-slate-100">
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-bold">${h.reference}</span>
-                        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-bold flex items-center gap-1">
-                            <i data-lucide="file-text" class="w-3 h-3"></i> ص ${pageNum}
-                        </span>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="bookmarkHadith('${bmId}', \`${h.arabic.replace(/`/g,"'")}\`, '${h.reference}')" class="text-slate-400 hover:text-amber-600 transition ${isBm ? 'text-amber-600' : ''}">
-                            <i data-lucide="${isBm ? 'bookmark-check' : 'bookmark'}" class="w-4 h-4"></i>
-                        </button>
-                        <button onclick="copyText('${h.arabic.replace(/'/g,"\\'")}')" class="text-slate-400 hover:text-emerald-600 transition">
-                            <i data-lucide="copy" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-        }).join('')}
-    `;
-    lucide.createIcons();
-    window.scrollTo({top:0, behavior:'smooth'});
-}
 
 function bookmarkHadith(bmId, text, reference) {
     addBookmark({ id: bmId, type: 'hadith', text, reference, date: new Date().toLocaleDateString('ar-EG') });
