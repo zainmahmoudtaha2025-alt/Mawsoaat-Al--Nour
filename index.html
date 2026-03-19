@@ -2700,8 +2700,6 @@ const fontLevels = ['reading-font-small','reading-font-medium','reading-font-lar
 function switchToReadingMode() {
     navTo('reading-page');
 }
-function toggleReadingPlayer() {}
-function resetReadingPlayerCollapse() {}
 function handleReadingAyahClick(i) {
     currentAyahIdx=i; playAyahDirect(i);
     updateQuranInfoBar(currentSurahNumber, i, window._readingAyahTexts ? window._readingAyahTexts.length : 1);
@@ -2711,7 +2709,6 @@ function handleReadingAyahClick(i) {
         mushafLoadPage(page, 0);
     }
 }
-function changeReadingFont(dir) {}
 function setReadingBg(mode) {
     const s=document.getElementById('reading-page');
     const inner=document.querySelector('.mushaf-page-inner');
@@ -5199,10 +5196,7 @@ function getMushafPage(surahNum, ayahIdx, totalAyahs) {
     var pgs  = Math.max(1, Math.round(totalAyahs/10));
     return Math.min(604, Math.max(1, meta.p + Math.floor(prog*pgs)));
 }
-function mushafImgLoaded() {}
-function rvImgLoaded() {}
 function mushafImgError() { _mLoading(false,false); _mRenderLocal(_mPage); }
-function rvImgError() {}
 function mushafRenderAyahMode() { _mRenderLocal(_mPage); }
 function mushafRetry()      { mushafLoadPage(_mPage, 0); }
 function mushafChangePage(d){ mushafLoadPage(_mPage + d, 0); }
@@ -5405,5 +5399,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
-موسوعة_زين_الإسلام_v24-2.html.txt
-Displaying موسوعة_زين_الإسلام_v24-2.html.txt.
