@@ -33,7 +33,8 @@
         body.dark-mode .mushaf-page-inner .reading-text { color: #f0deb8 !important; }
         body.dark-mode .active-ayah { background: rgba(197,160,89,0.25) !important; }
         body.dark-mode .hadith-card::before { color: rgba(197,160,89,0.05) !important; }
-        body.dark-mode #player-bar, body.dark-mode #reading-player { background: rgba(26,31,46,0.98) !important; border-color: #2d3348 !important; }
+        body.dark-mode #player-bar #pb-capsule { background: rgba(10,20,15,0.65) !important; border-color: rgba(197,160,89,0.3) !important; }
+        body.dark-mode #reading-player #rp-capsule { background: rgba(10,20,15,0.65) !important; border-color: rgba(197,160,89,0.3) !important; }
 
         body { font-family: 'Cairo', sans-serif; background: #f8fafc; margin: 0; }
         .quran-font { font-family: 'Amiri', serif; }
@@ -501,30 +502,108 @@
             </div>
         </div>
 
-        <!-- مشغّل الصوت في وضع المصحف - نفس تصميم المشغّل الرئيسي -->
-        <div id="reading-player" class="fixed hidden z-50 max-w-2xl mx-auto" style="bottom:70px;left:12px;right:12px;">
-            <div style="background:linear-gradient(135deg,#064e3b 0%,#085c47 100%);border-radius:20px;padding:12px 14px;box-shadow:0 8px 32px rgba(6,78,59,0.45);border:1px solid rgba(197,160,89,0.25);">
-                <div class="flex items-center gap-2 mb-2">
-                    <button onclick="toggleAudio()" id="reading-play-btn"
-                        style="width:40px;height:40px;border-radius:50%;background:rgba(197,160,89,0.9);color:#064e3b;border:none;font-size:16px;flex-shrink:0;cursor:pointer;">▶</button>
-                    <div style="flex:1;min-width:0;">
-                        <div id="reading-player-info" style="font-size:10px;font-weight:900;color:rgba(255,255,255,0.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">اضغط آية للتشغيل</div>
-                        <div style="width:100%;height:4px;background:rgba(255,255,255,0.15);border-radius:4px;margin-top:5px;">
-                            <div id="reading-progress" style="height:100%;background:linear-gradient(90deg,#c5a059,#f0c060);border-radius:4px;width:0%;transition:width 0.1s linear;"></div>
-                        </div>
+        <!-- مشغّل المصحف — كبسولة شفافة قابلة للسحب -->
+        <div id="reading-player" style="
+            display:none;
+            position:fixed; z-index:9999;
+            bottom:90px; left:50%; transform:translateX(-50%);
+            touch-action:none; user-select:none;
+        ">
+            <!-- الكبسولة الكاملة -->
+            <div id="rp-capsule" style="
+                background:rgba(6,30,20,0.55);
+                backdrop-filter:blur(18px) saturate(1.6);
+                -webkit-backdrop-filter:blur(18px) saturate(1.6);
+                border:1px solid rgba(197,160,89,0.35);
+                border-radius:999px;
+                box-shadow:0 8px 32px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.06) inset;
+                padding:7px 12px 7px 8px;
+                display:flex; align-items:center; gap:8px;
+                min-width:260px; max-width:92vw;
+                transition: padding 0.25s, min-width 0.25s;
+                cursor:grab;
+            ">
+                <!-- مقبض السحب -->
+                <div id="rp-drag-handle" style="
+                    width:18px; height:30px; display:flex; flex-direction:column;
+                    align-items:center; justify-content:center; gap:3px;
+                    cursor:grab; flex-shrink:0; opacity:0.4;
+                ">
+                    <div style="width:3px;height:3px;border-radius:50%;background:#c5a059;"></div>
+                    <div style="width:3px;height:3px;border-radius:50%;background:#c5a059;"></div>
+                    <div style="width:3px;height:3px;border-radius:50%;background:#c5a059;"></div>
+                </div>
+
+                <!-- زرار تشغيل -->
+                <button onclick="toggleAudio()" id="reading-play-btn" style="
+                    width:34px;height:34px;border-radius:50%;
+                    background:rgba(197,160,89,0.95);color:#064e3b;
+                    border:none;font-size:14px;flex-shrink:0;cursor:pointer;
+                    box-shadow:0 2px 8px rgba(197,160,89,0.4);
+                    transition:transform 0.1s;
+                " onmousedown="this.style.transform='scale(0.92)'" onmouseup="this.style.transform='scale(1)'">▶</button>
+
+                <!-- معلومات + شريط التقدم -->
+                <div id="rp-info-wrap" style="flex:1;min-width:0;">
+                    <div id="reading-player-info" style="
+                        font-size:9px;font-weight:900;
+                        color:rgba(255,255,255,0.88);
+                        white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+                        margin-bottom:4px;
+                    ">اضغط آية للتشغيل</div>
+                    <div onclick="seekAudio(event,this)" style="
+                        width:100%;height:3px;
+                        background:rgba(255,255,255,0.18);
+                        border-radius:4px;cursor:pointer;
+                    ">
+                        <div id="reading-progress" style="
+                            height:100%;
+                            background:linear-gradient(90deg,#c5a059,#f0c060);
+                            border-radius:4px;width:0%;
+                            transition:width 0.1s linear;
+                        "></div>
                     </div>
-                    <button onclick="changeAyah(1)"  style="background:rgba(255,255,255,0.1);border:none;color:white;width:30px;height:30px;border-radius:50%;font-size:12px;cursor:pointer;">⏮</button>
-                    <button onclick="changeAyah(-1)" style="background:rgba(255,255,255,0.1);border:none;color:white;width:30px;height:30px;border-radius:50%;font-size:12px;cursor:pointer;">⏭</button>
                 </div>
-                <div style="display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;">
-                    <button onclick="setSpeed(0.5)"  class="spd-btn" data-spd="0.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">0.5×</button>
-                    <button onclick="setSpeed(0.75)" class="spd-btn" data-spd="0.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">0.75×</button>
-                    <button onclick="setSpeed(1)"    class="spd-btn spd-active" data-spd="1"    style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(197,160,89,0.9);color:#064e3b;">1×</button>
-                    <button onclick="setSpeed(1.25)" class="spd-btn" data-spd="1.25" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">1.25×</button>
-                    <button onclick="setSpeed(1.5)"  class="spd-btn" data-spd="1.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">1.5×</button>
-                    <button onclick="setSpeed(1.75)" class="spd-btn" data-spd="1.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">1.75×</button>
-                    <button onclick="setSpeed(2)"    class="spd-btn" data-spd="2"    style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">2×</button>
-                </div>
+
+                <!-- أزرار التنقل + التكرار -->
+                <button onclick="changeAyah(1)" style="
+                    background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.8);
+                    width:28px;height:28px;border-radius:50%;font-size:11px;cursor:pointer;flex-shrink:0;
+                ">⏮</button>
+                <button onclick="changeAyah(-1)" style="
+                    background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.8);
+                    width:28px;height:28px;border-radius:50%;font-size:11px;cursor:pointer;flex-shrink:0;
+                ">⏭</button>
+                <button onclick="toggleSurahRepeat()" id="surah-repeat-btn" title="تكرار السورة" style="
+                    background:rgba(255,255,255,0.1);border:none;
+                    color:rgba(255,255,255,0.55);
+                    width:28px;height:28px;border-radius:50%;font-size:13px;
+                    cursor:pointer;flex-shrink:0;
+                    transition:background 0.2s, color 0.2s;
+                ">🔁</button>
+
+                <!-- زرار تصغير / تكبير -->
+                <button onclick="togglePlayerCollapse()" id="rp-collapse-btn" style="
+                    background:rgba(255,255,255,0.07);border:none;
+                    color:rgba(255,255,255,0.5);
+                    width:22px;height:22px;border-radius:50%;font-size:10px;
+                    cursor:pointer;flex-shrink:0;line-height:1;
+                " title="تصغير">−</button>
+            </div>
+
+            <!-- صف السرعة (قابل للإخفاء) -->
+            <div id="rp-speed-row" style="
+                display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;
+                padding:5px 10px 0;
+                justify-content:center;
+            ">
+                <button onclick="setSpeed(0.5)"  class="spd-btn" data-spd="0.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">0.5×</button>
+                <button onclick="setSpeed(0.75)" class="spd-btn" data-spd="0.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">0.75×</button>
+                <button onclick="setSpeed(1)"    class="spd-btn spd-active" data-spd="1"    style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(197,160,89,0.9);color:#064e3b;">1×</button>
+                <button onclick="setSpeed(1.25)" class="spd-btn" data-spd="1.25" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">1.25×</button>
+                <button onclick="setSpeed(1.5)"  class="spd-btn" data-spd="1.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">1.5×</button>
+                <button onclick="setSpeed(1.75)" class="spd-btn" data-spd="1.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">1.75×</button>
+                <button onclick="setSpeed(2)"    class="spd-btn" data-spd="2"    style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">2×</button>
             </div>
         </div>
     </section>
@@ -937,41 +1016,112 @@
     </section>
 </main>
 
-<!-- شريط التشغيل -->
-<div id="player-bar" class="fixed hidden z-[1000] max-w-2xl mx-auto" style="bottom:68px;left:12px;right:12px;">
-    <div class="player-card" style="background:linear-gradient(135deg,#064e3b 0%,#085c47 100%);border-radius:20px;padding:12px 14px;box-shadow:0 8px 32px rgba(6,78,59,0.45);border:1px solid rgba(197,160,89,0.25);">
-        <!-- الصف العلوي: معلومات + تحكم رئيسي -->
-        <div class="flex items-center gap-2 mb-2">
-            <button onclick="toggleAudio()" id="main-play-btn"
-                style="width:40px;height:40px;border-radius:50%;background:rgba(197,160,89,0.9);color:#064e3b;border:none;font-size:16px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;">▶</button>
-            <div style="flex:1;min-width:0;">
-                <div id="player-info" style="font-size:10px;font-weight:900;color:rgba(255,255,255,0.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">اختر سورة للبدء</div>
-                <!-- شريط التقدم -->
-                <div onclick="seekAudio(event,this)" style="width:100%;height:4px;background:rgba(255,255,255,0.15);border-radius:4px;margin-top:5px;cursor:pointer;position:relative;">
-                    <div id="main-progress-bar" style="height:100%;background:linear-gradient(90deg,#c5a059,#f0c060);border-radius:4px;width:0%;transition:width 0.1s linear;"></div>
-                </div>
-                <div style="display:flex;justify-content:space-between;margin-top:2px;">
-                    <span id="main-time-cur" style="font-size:8px;color:rgba(255,255,255,0.5);font-weight:bold;">0:00</span>
-                    <span id="main-time-tot" style="font-size:8px;color:rgba(255,255,255,0.5);font-weight:bold;">0:00</span>
-                </div>
+<!-- شريط التشغيل الرئيسي — كبسولة شفافة قابلة للسحب -->
+<div id="player-bar" style="
+    display:none; position:fixed; z-index:9999;
+    bottom:90px; left:50%; transform:translateX(-50%);
+    touch-action:none; user-select:none;
+">
+    <!-- الكبسولة -->
+    <div id="pb-capsule" style="
+        background:rgba(6,30,20,0.55);
+        backdrop-filter:blur(18px) saturate(1.6);
+        -webkit-backdrop-filter:blur(18px) saturate(1.6);
+        border:1px solid rgba(197,160,89,0.35);
+        border-radius:999px;
+        box-shadow:0 8px 32px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.06) inset;
+        padding:7px 12px 7px 8px;
+        display:flex; align-items:center; gap:8px;
+        min-width:260px; max-width:92vw;
+        cursor:grab;
+    ">
+        <!-- مقبض السحب -->
+        <div id="pb-drag-handle" style="
+            width:18px; height:30px; display:flex; flex-direction:column;
+            align-items:center; justify-content:center; gap:3px;
+            cursor:grab; flex-shrink:0; opacity:0.4; pointer-events:none;
+        ">
+            <div style="width:3px;height:3px;border-radius:50%;background:#c5a059;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#c5a059;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#c5a059;"></div>
+        </div>
+
+        <!-- زرار تشغيل -->
+        <button onclick="toggleAudio()" id="main-play-btn" style="
+            width:34px;height:34px;border-radius:50%;
+            background:rgba(197,160,89,0.95);color:#064e3b;
+            border:none;font-size:14px;flex-shrink:0;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            box-shadow:0 2px 8px rgba(197,160,89,0.4);
+            transition:transform 0.1s;
+        ">▶</button>
+
+        <!-- معلومات + شريط تقدم -->
+        <div id="pb-info-wrap" style="flex:1;min-width:0;">
+            <div id="player-info" style="
+                font-size:9px;font-weight:900;
+                color:rgba(255,255,255,0.88);
+                white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+                margin-bottom:4px;
+            ">اختر سورة للبدء</div>
+            <div onclick="seekAudio(event,this)" style="
+                width:100%;height:3px;
+                background:rgba(255,255,255,0.18);
+                border-radius:4px;cursor:pointer;
+            ">
+                <div id="main-progress-bar" style="
+                    height:100%;
+                    background:linear-gradient(90deg,#c5a059,#f0c060);
+                    border-radius:4px;width:0%;
+                    transition:width 0.1s linear;
+                "></div>
             </div>
-            <div style="display:flex;gap:4px;flex-shrink:0;">
-                <button onclick="changeAyah(1)"  style="background:rgba(255,255,255,0.1);border:none;color:white;width:30px;height:30px;border-radius:50%;font-size:12px;cursor:pointer;">⏮</button>
-                <button onclick="changeAyah(-1)" style="background:rgba(255,255,255,0.1);border:none;color:white;width:30px;height:30px;border-radius:50%;font-size:12px;cursor:pointer;">⏭</button>
+            <div style="display:flex;justify-content:space-between;margin-top:2px;">
+                <span id="main-time-cur" style="font-size:8px;color:rgba(255,255,255,0.45);font-weight:bold;">0:00</span>
+                <span id="main-time-tot" style="font-size:8px;color:rgba(255,255,255,0.45);font-weight:bold;">0:00</span>
             </div>
         </div>
-        <!-- الصف السفلي: سرعة التشغيل -->
-        <div style="display:flex;gap:4px;align-items:center;overflow-x:auto;scrollbar-width:none;">
-            <span style="font-size:9px;color:rgba(255,255,255,0.5);font-weight:bold;flex-shrink:0;margin-left:4px;">سرعة:</span>
-            <button onclick="setSpeed(0.5)"  class="spd-btn" data-spd="0.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">0.5×</button>
-            <button onclick="setSpeed(0.75)" class="spd-btn" data-spd="0.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">0.75×</button>
-            <button onclick="setSpeed(1)"    class="spd-btn spd-active" data-spd="1"    style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;background:rgba(197,160,89,0.9);color:#064e3b;">1×</button>
-            <button onclick="setSpeed(1.25)" class="spd-btn" data-spd="1.25" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">1.25×</button>
-            <button onclick="setSpeed(1.5)"  class="spd-btn" data-spd="1.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">1.5×</button>
-            <button onclick="setSpeed(1.75)" class="spd-btn" data-spd="1.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">1.75×</button>
-            <button onclick="setSpeed(2)"    class="spd-btn" data-spd="2"    style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">2×</button>
-        </div>
+
+        <!-- أزرار التنقل + التكرار -->
+        <button onclick="changeAyah(1)" style="
+            background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.8);
+            width:28px;height:28px;border-radius:50%;font-size:11px;cursor:pointer;flex-shrink:0;
+        ">⏮</button>
+        <button onclick="changeAyah(-1)" style="
+            background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.8);
+            width:28px;height:28px;border-radius:50%;font-size:11px;cursor:pointer;flex-shrink:0;
+        ">⏭</button>
+        <button onclick="toggleSurahRepeat()" id="main-repeat-btn" title="تكرار السورة" style="
+            background:rgba(255,255,255,0.1);border:none;
+            color:rgba(255,255,255,0.55);
+            width:28px;height:28px;border-radius:50%;font-size:13px;
+            cursor:pointer;flex-shrink:0;
+            transition:background 0.2s, color 0.2s;
+        ">🔁</button>
+
+        <!-- زرار تصغير -->
+        <button onclick="toggleMainPlayerCollapse()" id="pb-collapse-btn" style="
+            background:rgba(255,255,255,0.07);border:none;
+            color:rgba(255,255,255,0.5);
+            width:22px;height:22px;border-radius:50%;font-size:10px;
+            cursor:pointer;flex-shrink:0;line-height:1;
+        " title="تصغير">−</button>
     </div>
+
+    <!-- صف السرعة -->
+    <div id="pb-speed-row" style="
+        display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;
+        padding:5px 10px 0; justify-content:center;
+    ">
+        <button onclick="setSpeed(0.5)"  class="spd-btn" data-spd="0.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">0.5×</button>
+        <button onclick="setSpeed(0.75)" class="spd-btn" data-spd="0.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">0.75×</button>
+        <button onclick="setSpeed(1)"    class="spd-btn spd-active" data-spd="1" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(197,160,89,0.9);color:#064e3b;">1×</button>
+        <button onclick="setSpeed(1.25)" class="spd-btn" data-spd="1.25" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">1.25×</button>
+        <button onclick="setSpeed(1.5)"  class="spd-btn" data-spd="1.5"  style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">1.5×</button>
+        <button onclick="setSpeed(1.75)" class="spd-btn" data-spd="1.75" style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">1.75×</button>
+        <button onclick="setSpeed(2)"    class="spd-btn" data-spd="2"    style="font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;border:none;cursor:pointer;flex-shrink:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">2×</button>
+    </div>
+
     <audio id="main-audio"></audio>
 </div>
 
@@ -1476,7 +1626,7 @@ async function openSurah(n) {
         }).join('');
         currentAyahIdx = 0;
         playAyahDirect(0);
-        document.getElementById('player-bar').classList.remove('hidden');
+        document.getElementById('player-bar').style.display='block';
         lucide.createIcons();
     } catch(e) {
         document.getElementById('surah-content').innerHTML = '<div class="error-msg">تعذر تحميل السورة</div>';
@@ -1589,10 +1739,161 @@ function playAyahDirect(i) {
 
 // وقفة طبيعية بين الآيات (0.5 ثانية)
 let _pauseTimer = null;
+let surahRepeat = false;
+
+function toggleSurahRepeat() {
+    surahRepeat = !surahRepeat;
+    // تحديث زرار وضع المصحف
+    const btn1 = document.getElementById('surah-repeat-btn');
+    if (btn1) {
+        btn1.style.background = surahRepeat ? 'rgba(197,160,89,0.9)' : 'rgba(255,255,255,0.1)';
+        btn1.style.color = surahRepeat ? '#064e3b' : 'rgba(255,255,255,0.55)';
+        btn1.style.boxShadow = surahRepeat ? '0 0 10px rgba(197,160,89,0.5)' : 'none';
+    }
+    // تحديث زرار وضع الاستماع
+    const btn2 = document.getElementById('main-repeat-btn');
+    if (btn2) {
+        btn2.style.background = surahRepeat ? 'rgba(197,160,89,0.9)' : 'rgba(255,255,255,0.1)';
+        btn2.style.color = surahRepeat ? '#064e3b' : 'rgba(255,255,255,0.55)';
+        btn2.style.boxShadow = surahRepeat ? '0 0 10px rgba(197,160,89,0.5)' : 'none';
+    }
+    showToast(surahRepeat ? '🔁 تكرار السورة: تشغيل' : '🔁 تكرار السورة: إيقاف');
+}
+
+// ── تصغير / تكبير مشغل المصحف ──
+let rpCollapsed = false;
+function togglePlayerCollapse() {
+    rpCollapsed = !rpCollapsed;
+    const infoWrap = document.getElementById('rp-info-wrap');
+    const speedRow = document.getElementById('rp-speed-row');
+    const colBtn   = document.getElementById('rp-collapse-btn');
+    const capsule  = document.getElementById('rp-capsule');
+    if (rpCollapsed) {
+        if (infoWrap) infoWrap.style.display = 'none';
+        if (speedRow) speedRow.style.display = 'none';
+        if (colBtn)   colBtn.innerText = '+';
+        if (capsule)  capsule.style.minWidth = '0';
+    } else {
+        if (infoWrap) infoWrap.style.display = '';
+        if (speedRow) speedRow.style.display = '';
+        if (colBtn)   colBtn.innerText = '−';
+        if (capsule)  capsule.style.minWidth = '260px';
+    }
+}
+
+// ── تصغير / تكبير المشغل الرئيسي ──
+let pbCollapsed = false;
+function toggleMainPlayerCollapse() {
+    pbCollapsed = !pbCollapsed;
+    const infoWrap = document.getElementById('pb-info-wrap');
+    const speedRow = document.getElementById('pb-speed-row');
+    const colBtn   = document.getElementById('pb-collapse-btn');
+    const capsule  = document.getElementById('pb-capsule');
+    if (pbCollapsed) {
+        if (infoWrap) infoWrap.style.display = 'none';
+        if (speedRow) speedRow.style.display = 'none';
+        if (colBtn)   colBtn.innerText = '+';
+        if (capsule)  capsule.style.minWidth = '0';
+    } else {
+        if (infoWrap) infoWrap.style.display = '';
+        if (speedRow) speedRow.style.display = '';
+        if (colBtn)   colBtn.innerText = '−';
+        if (capsule)  capsule.style.minWidth = '260px';
+    }
+}
+
+// ── سحب المشغل الرئيسي ──
+(function initMainPlayerDrag() {
+    let isDragging = false, startX, startY, initLeft, initTop;
+    function setup() {
+        const el = document.getElementById('player-bar');
+        const handle = document.getElementById('pb-capsule');
+        if (!el || !handle) return;
+        function getPos() { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top }; }
+        function startDrag(cx, cy) {
+            isDragging = true;
+            const pos = getPos();
+            startX = cx; startY = cy; initLeft = pos.x; initTop = pos.y;
+            el.style.transform = 'none'; el.style.bottom = 'auto';
+            el.style.left = initLeft + 'px'; el.style.top = initTop + 'px';
+            handle.style.cursor = 'grabbing';
+        }
+        function moveDrag(cx, cy) {
+            if (!isDragging) return;
+            el.style.left = Math.max(0, Math.min(window.innerWidth  - 60, initLeft + cx - startX)) + 'px';
+            el.style.top  = Math.max(0, Math.min(window.innerHeight - 60, initTop  + cy - startY)) + 'px';
+        }
+        function endDrag() { isDragging = false; handle.style.cursor = 'grab'; }
+        handle.addEventListener('mousedown',  e => { if(e.target.tagName==='BUTTON') return; startDrag(e.clientX, e.clientY); e.preventDefault(); });
+        document.addEventListener('mousemove', e => moveDrag(e.clientX, e.clientY));
+        document.addEventListener('mouseup',   endDrag);
+        handle.addEventListener('touchstart',  e => { if(e.target.tagName==='BUTTON') return; startDrag(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+        document.addEventListener('touchmove',  e => { if(isDragging) moveDrag(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+        document.addEventListener('touchend',   endDrag);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
+    else setup();
+})();
+
+// ── سحب مشغل المصحف ──
+(function initReadingPlayerDrag() {
+    let isDragging = false, startX, startY, initLeft, initTop;
+    let el, handle;
+
+    function setup() {
+        el = document.getElementById('reading-player');
+        handle = document.getElementById('rp-capsule');
+        if (!el || !handle) return;
+
+        function getPos() {
+            const rect = el.getBoundingClientRect();
+            return { x: rect.left, y: rect.top };
+        }
+        function startDrag(cx, cy) {
+            isDragging = true;
+            const pos = getPos();
+            startX = cx; startY = cy;
+            initLeft = pos.x; initTop = pos.y;
+            el.style.transform = 'none';
+            el.style.bottom = 'auto';
+            el.style.left = initLeft + 'px';
+            el.style.top  = initTop  + 'px';
+            handle.style.cursor = 'grabbing';
+        }
+        function moveDrag(cx, cy) {
+            if (!isDragging) return;
+            const dx = cx - startX, dy = cy - startY;
+            el.style.left = Math.max(0, Math.min(window.innerWidth  - 60, initLeft + dx)) + 'px';
+            el.style.top  = Math.max(0, Math.min(window.innerHeight - 60, initTop  + dy)) + 'px';
+        }
+        function endDrag() { isDragging = false; if(handle) handle.style.cursor = 'grab'; }
+
+        handle.addEventListener('mousedown',  e => { if(e.target.tagName==='BUTTON') return; startDrag(e.clientX, e.clientY); e.preventDefault(); });
+        document.addEventListener('mousemove', e => moveDrag(e.clientX, e.clientY));
+        document.addEventListener('mouseup',   endDrag);
+        handle.addEventListener('touchstart',  e => { if(e.target.tagName==='BUTTON') return; startDrag(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+        document.addEventListener('touchmove',  e => { if(isDragging) { moveDrag(e.touches[0].clientX, e.touches[0].clientY); } }, {passive:true});
+        document.addEventListener('touchend',   endDrag);
+    }
+
+    // ننتظر الـ DOM إذا كان الكود بيشتغل قبله
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
+    else setup();
+})();
+
 audio.onended = () => {
-    if(!ayahAutoPlay || !ayahs.length || currentAyahIdx >= ayahs.length - 1) return;
-    // وقفة 600ms بين الآيات ← يمنع التداخل
+    if(!ayahAutoPlay || !ayahs.length) return;
     clearTimeout(_pauseTimer);
+    if (currentAyahIdx >= ayahs.length - 1) {
+        // انتهت السورة
+        if (surahRepeat) {
+            _pauseTimer = setTimeout(() => {
+                playAyahDirect(0);
+            }, 800);
+        }
+        return;
+    }
+    // وقفة 600ms بين الآيات ← يمنع التداخل
     _pauseTimer = setTimeout(() => {
         playAyahDirect(currentAyahIdx + 1);
     }, 600);
@@ -1657,8 +1958,8 @@ let readingFontLevel = 1;
 const fontLevels = ['reading-font-small','reading-font-medium','reading-font-large','reading-font-xlarge'];
 function switchToReadingMode() {
     navTo('reading-page'); renderReadingContent();
-    document.getElementById('reading-player').classList.remove('hidden');
-    document.getElementById('player-bar').classList.add('hidden');
+    document.getElementById('reading-player').style.display = 'block';
+    document.getElementById('player-bar').style.display='none';
 }
 function renderReadingContent() {
     const section = document.getElementById('reading-page');
@@ -2777,7 +3078,7 @@ async function restoreSession() {
         showResumeBanner(s.surahName, s.ayahIdx + 1);
 
         // إعداد player bar
-        document.getElementById('player-bar').classList.remove('hidden');
+        document.getElementById('player-bar').style.display='block';
         document.getElementById('current-surah-title').innerText = s.surahName;
 
         // إعادة بناء محتوى السورة في DOM
@@ -2854,12 +3155,12 @@ function navTo(id) {
     if(id==='reader-view' && currentSurahNumber && ayahs.length) {
         // السورة مازالت في الذاكرة — لا تعيد التحميل
         document.getElementById('current-surah-title').innerText = currentSurahName;
-        document.getElementById('player-bar').classList.remove('hidden');
+        document.getElementById('player-bar').style.display='block';
     }
     if(id==='reading-page' && currentSurahNumber && ayahs.length) {
         renderReadingContent();
-        document.getElementById('reading-player').classList.remove('hidden');
-        document.getElementById('player-bar').classList.add('hidden');
+        document.getElementById('reading-player').style.display = 'block';
+        document.getElementById('player-bar').style.display='none';
     }
     // حفظ الصفحة الحالية
     localStorage.setItem('last_page', id);
